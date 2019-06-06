@@ -15,6 +15,7 @@ import { WsService } from './services/ws/ws.service';
 import { AutService } from './services/auth/auth.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { BotDetectCaptchaModule } from 'angular-captcha'; 
 
 const appRoutes: Routes = [
   {
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpModule,
     JwtModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BotDetectCaptchaModule
   ],
   providers: [
     WsService,
