@@ -22,6 +22,7 @@
     "@angular/router": "~7.2.0",
     "@auth0/angular-jwt": "^2.1.0",
     "angular-captcha": "^3.7.1",
+    "angular-google-recaptcha": "^1.0.3",
     "angular2-jwt": "^0.2.3",
     "core-js": "^2.5.4",
     "rxjs": "^6.3.3",

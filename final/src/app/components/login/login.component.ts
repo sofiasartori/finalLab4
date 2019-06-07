@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, AbstractControl, FormControl, FormsModule, FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { WsService } from '../../services/ws/ws.service';
-import { CaptchaComponent } from 'angular-captcha'; 
+
 // import { Http, Response } from '@angular/http';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/operator/catch';
@@ -31,8 +31,9 @@ export class LoginComponent implements OnInit {
   // public password:AbstractControl;
   // public submitted:boolean = false;
   user: User = new User('','');
-  url: string = 'http://localhost:8080/servidor/jwt/';
-  captchaComponent: any;
+  //url: string = 'http://localhost:8080/servidor/jwt/';
+  url: string = 'http://localhost/servidor/jwt/';
+  myRecaptcha: boolean;
 
   constructor( private router: Router, private ws: WsService) {
     this.user.email = '';
@@ -41,9 +42,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.captchaComponent.captchaEndpoint = 
-      'https://your-app-backend-hostname.your-domain.com/botdetect-captcha-lib/simple-botdetect.php';
-  
+
+
   }
   enviar()
   {
@@ -61,5 +61,13 @@ export class LoginComponent implements OnInit {
       console.log(e);
     } );
   }
+
+  onScriptLoad() {
+    console.log('Google reCAPTCHA loaded and is ready for use!')
+}
+
+onScriptError() {
+    console.log('Something went long when loading the Google reCAPTCHA')
+}
 
 }

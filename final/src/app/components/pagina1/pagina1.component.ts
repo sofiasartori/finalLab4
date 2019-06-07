@@ -10,7 +10,7 @@ export class Pagina1Component implements OnInit {
 
   constructor(private ws: WsService)
   {
-    this.ws.getJwt('http://localhost:8080/servidor/jwt/pagina1.php', {})
+    this.ws.getJwt('http://localhost/servidor/jwt/pagina1.php', {})
     .then(data => {
       console.log(data);
     })

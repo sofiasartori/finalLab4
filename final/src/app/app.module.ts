@@ -15,7 +15,7 @@ import { WsService } from './services/ws/ws.service';
 import { AutService } from './services/auth/auth.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { BotDetectCaptchaModule } from 'angular-captcha'; 
+import { RecaptchaModule } from 'angular-google-recaptcha';
 
 const appRoutes: Routes = [
   {
@@ -42,10 +42,13 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+// tslint:disable-next-line: deprecation
     HttpModule,
     JwtModule,
     RouterModule.forRoot(appRoutes),
-    BotDetectCaptchaModule
+    RecaptchaModule.forRoot({
+      siteKey: '6Lf-lqcUAAAAAAeKz7gAZM8NsleoUS_H05wGUSqe',
+  }),
   ],
   providers: [
     WsService,
