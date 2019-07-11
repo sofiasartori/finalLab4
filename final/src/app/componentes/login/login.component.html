@@ -1,0 +1,14 @@
+<div>
+  <form [formGroup]="loginForm" class="modal-content animate" (ngSubmit)="login()" >
+    <div class="container">
+      <label><b>Email:</b></label>
+      <input type="email" [(ngModel)]="usuario.email" placeholder="email" [formControl]="email" required>
+      <label>Password:
+        <input type="password" [(ngModel)]="usuario.password" placeholder="password" [formControl]="password" required>
+      </label>
+      <div>
+        <button type="submit" [disabled]="!loginForm.valid">Login</button>
+      </div>
+    </div>
+  </form>
+  </div>

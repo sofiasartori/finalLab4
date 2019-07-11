@@ -1,0 +1,6 @@
+<app-email-sesion></app-email-sesion>
+<button (click)="altaMascota()">Dar de alta mascota</button>
+<button (click)="listadoMascotas()">Listado de mascotas</button>
+<button (click)="listadoTurnos()" *ngIf="administrador">Listado de turnos</button>
+<button (click)="pedirTurno()" *ngIf="cliente">Pedir turno</button>
+<button (click)="chat()">Chat</button>

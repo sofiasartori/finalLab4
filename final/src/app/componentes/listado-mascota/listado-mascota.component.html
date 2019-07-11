@@ -1,0 +1,29 @@
+<app-email-sesion></app-email-sesion><br>
+<app-boton-menu></app-boton-menu><br>
+<table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Animal</th>
+        <th>Raza</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Dueño</th>
+        <th>Foto</th>
+        <th>Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mascota of listado" >
+        <td>{{mascota.id}} </td>
+        <td>{{mascota.animal}} </td>
+        <td>{{mascota.raza}} </td>
+        <td>{{mascota.nombre}} </td>
+        <td>{{mascota.edad}} </td>
+        <td>{{mascota.duenio}} </td>
+        <td><img width="50" height="50" [src]="getSantizeUrl(mascota.foto)" /> </td>
+        <td><button (click)="abrirFormilarioEdicion(mascota.id)">Editar</button></td>
+      </tr>
+    </tbody>
+  </table>
+<app-formulario-edicion *ngIf="mascotaAEditar" [mascotaId]="mascotaAEditar" (SeModificoUnaMascota)="TraerTodos()"></app-formulario-edicion>

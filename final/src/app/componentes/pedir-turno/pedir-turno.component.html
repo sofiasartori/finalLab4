@@ -1,0 +1,22 @@
+<app-email-sesion></app-email-sesion><br>
+<app-boton-menu></app-boton-menu><br>
+<div *ngIf="!nuevoTurno">
+
+
+    <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevoTurno()">Nuevo Turno</button>
+  
+  
+  </div>
+  <div *ngIf="nuevoTurno">
+    <form [formGroup]="altaTurnoForm" class="modal-content animate" (ngSubmit)="crearTurno()" >
+      <div class="container">
+        <label><b>Dia:</b></label>
+        <input type="date" [(ngModel)]="nuevoTurno.dia" placeholder="dia" [formControl]="dia" required>
+        <label>Hora:</label>
+        <input type="time" [(ngModel)]="nuevoTurno.hora" placeholder="hora" [formControl]="hora" required>
+        <div>
+          <button type="submit" [disabled]="!altaTurnoForm.valid">Crear</button>
+        </div>
+      </div>
+    </form>
+    </div>

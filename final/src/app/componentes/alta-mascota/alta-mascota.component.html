@@ -1,0 +1,34 @@
+<app-email-sesion></app-email-sesion><br>
+<app-boton-menu></app-boton-menu><br>
+<div *ngIf="!nuevaMascota">
+
+
+  <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevaMascota()">Nueva Mascota</button>
+
+
+</div>
+<div *ngIf="nuevaMascota">
+  <form [formGroup]="altaMascotaForm" class="modal-content animate" (ngSubmit)="crearMascota()" >
+    <div class="container">
+      <label><b>Animal:</b></label>
+      <select [(ngModel)]="nuevaMascota.animal"  [formControl]="animal" required>
+        <option value="perro">Perro</option>
+        <option value="gato">Gato</option>
+        <option value="huron">Huron</option>
+      </select>
+      <label><b>Raza:</b></label>
+      <input type="text" [(ngModel)]="nuevaMascota.raza" placeholder="raza" [formControl]="raza" required>
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="nuevaMascota.nombre" placeholder="nombre" [formControl]="nombre" required>
+      <label>Edad:</label>
+      <input type="number" [(ngModel)]="nuevaMascota.edad" placeholder="edad" [formControl]="edad" required>
+      <label *ngIf="admin">Dueño:</label>
+      <input *ngIf="admin" type="text" [(ngModel)]="nuevaMascota.duenio" placeholder="dueño" [formControl]="duenio">
+      <label>Foto:</label>
+      <input #imageInput type="file" [(ngModel)]="nuevaMascota.foto" accept="image/*" [formControl]="foto" required>
+      <div>
+        <button type="submit" [disabled]="!altaMascotaForm.valid">Crear</button>
+      </div>
+    </div>
+  </form>
+  </div>
