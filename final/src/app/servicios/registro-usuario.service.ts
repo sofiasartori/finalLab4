@@ -28,6 +28,13 @@ export class registroUsuarioService {
  }
 
  login(ruta: string, desc: any){
-   return this.miHttp.insertarUsuario('login/', desc);
+   return this.miHttp.login('login/', desc);
  }
+
+ enviarCaptcha(response){
+  let data = {
+    'g-recaptcha-response': response
+  };
+  return this.miHttp.httpPostPSinSubscripcion("captcha/", data);
+}
 }

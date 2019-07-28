@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
 import { MiHttpService } from './mi-http.service';
 
 @Injectable({
@@ -8,10 +9,11 @@ import { MiHttpService } from './mi-http.service';
 export class ArchivosUsuarioService {
 
   //api = 'http://localhost/veterinaria/apirest.php/';
-  api = 'http://localhost:8080/veterinaria/apirest.php/';
+  api = 'http://localhost:8080/clinica/apirest.php/';
   //apiJWT = 'http://localhost:8080/veterinaria/jwt/';
   peticion: any;
-  constructor( public miHttp: MiHttpService ) {
+  private urlBase: string;
+  constructor( public miHttp: MiHttpService, private http:HttpClient ) {
   }
 
 
@@ -28,8 +30,12 @@ export class ArchivosUsuarioService {
   }
 
   public insertarUsuario(ruta, objeto) {
-    return this.miHttp.httpPostP2(this.api + ruta, JSON.stringify(objeto));
+    return this.miHttp.httpPostP(this.api + ruta, JSON.stringify(objeto));
 
+  }
+
+  public login(ruta, objeto){
+    return this.miHttp.httpPostP2(this.api + ruta, JSON.stringify(objeto));
   }
 
   public borrarUsuario(ruta, id) {
@@ -48,5 +54,11 @@ export class ArchivosUsuarioService {
     }, err => {
       console.log( err );
     })
+  }
+
+  public httpPostPSinSubscripcion( url: string, objeto: any )
+  {
+    return this.http
+    .post( this.urlBase + url , objeto );
   }
 }

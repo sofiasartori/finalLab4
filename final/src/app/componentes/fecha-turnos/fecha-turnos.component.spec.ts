@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormularioEdicionComponent } from './formulario-edicion.component';
+import { FechaTurnosComponent } from './fecha-turnos.component';
 
-describe('FormularioEdicionComponent', () => {
-  let component: FormularioEdicionComponent;
-  let fixture: ComponentFixture<FormularioEdicionComponent>;
+describe('FechaTurnosComponent', () => {
+  let component: FechaTurnosComponent;
+  let fixture: ComponentFixture<FechaTurnosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormularioEdicionComponent ]
+      declarations: [ FechaTurnosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormularioEdicionComponent);
+    fixture = TestBed.createComponent(FechaTurnosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

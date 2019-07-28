@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Usuario } from '../../clases/usuario';
 import { registroUsuarioService } from '../../servicios/registro-usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-alta',
@@ -14,7 +15,7 @@ export class FormularioAltaComponent implements OnInit {
   nuevoUsuario: Usuario;
   miUsuarioServicio: registroUsuarioService;
   
-  constructor(serviceUsuario: registroUsuarioService, private builder: FormBuilder) {
+  constructor(serviceUsuario: registroUsuarioService, private builder: FormBuilder, private router: Router) {
     this.miUsuarioServicio = serviceUsuario;
    }
 
@@ -56,6 +57,28 @@ export class FormularioAltaComponent implements OnInit {
   hacerNuevoUsuario()
   {
     this.nuevoUsuario=new Usuario("","", "", "");
+  }
 
+  handleFileSelect(evt){
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload =this._handleReaderLoaded.bind(this);
+
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.nuevoUsuario.foto =  btoa(binaryString)
+    console.log(btoa(binaryString));
+  }
+
+  volverInicio(){
+    this.router.navigate(['/inicio']);
   }
 }

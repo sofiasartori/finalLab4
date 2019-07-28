@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,15 +13,12 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorLoginComponent } from './componentes/error-login/error-login.component';
 import { EmailSesionComponent } from './componentes/email-sesion/email-sesion.component';
-import { AltaMascotaComponent } from './componentes/alta-mascota/alta-mascota.component';
-import { ListadoMascotaComponent } from './componentes/listado-mascota/listado-mascota.component';
 import { PedirTurnoComponent } from './componentes/pedir-turno/pedir-turno.component';
 import { ListarTurnoComponent } from './componentes/listar-turno/listar-turno.component';
 import { AuthService } from './servicios/auth.service';
 import { AuthGuard } from './auth.guard';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { BotonMenuComponent } from './componentes/boton-menu/boton-menu.component';
-import { FormularioEdicionComponent } from './componentes/formulario-edicion/formulario-edicion.component';
 import { ChatService } from './servicios/chat.service';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -27,6 +26,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormularioChatComponent } from './componentes/formulario-chat/formulario-chat.component';
 import { MensajeComponent } from './componentes/mensaje/mensaje.component';
 import { SalaChatComponent } from './componentes/sala-chat/sala-chat.component';
+import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
+import { CancelarTurnoComponent } from './componentes/cancelar-turno/cancelar-turno.component';
+import { ListadoConsultoriosComponent } from './componentes/listado-consultorios/listado-consultorios.component';
+import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
+import { FormularioHistoriaComponent } from './componentes/formulario-historia/formulario-historia.component';
+import { ColorDirective } from './color.directive';
+import { FiltroTurnosComponent } from './componentes/filtro-turnos/filtro-turnos.component';
+import { FechaTurnosComponent } from './componentes/fecha-turnos/fecha-turnos.component';
 
 
 const appRoutes: Routes = [
@@ -39,12 +46,10 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'formulario-usuario',  component: FormularioAltaComponent},
   { path: 'errorLogin',  component: ErrorLoginComponent},
-  { path: 'formularioMascota',  component: AltaMascotaComponent, canActivate: [AuthGuard]},
-  { path: 'listaMascota',  component: ListadoMascotaComponent, canActivate: [AuthGuard]},
   { path: 'listaTurno',  component: ListarTurnoComponent, canActivate: [AuthGuard]},
   { path: 'menu',  component: MenuComponent, canActivate: [AuthGuard]},
-  { path: 'editarMascota',  component: FormularioEdicionComponent, canActivate: [AuthGuard]},
-  { path: 'chat',  component: SalaChatComponent, canActivate:[AuthGuard]}
+  { path: 'chat',  component: SalaChatComponent, canActivate:[AuthGuard]},
+  { path: 'listaConsultorios',  component: ListadoConsultoriosComponent, canActivate:[AuthGuard]}
   //{ path: '**', component: ErrorComponent }
 ];
 
@@ -56,16 +61,21 @@ const appRoutes: Routes = [
     InicioComponent,
     ErrorLoginComponent,
     EmailSesionComponent,
-    AltaMascotaComponent,
-    ListadoMascotaComponent,
     PedirTurnoComponent,
     ListarTurnoComponent,
     MenuComponent,
     BotonMenuComponent,
-    FormularioEdicionComponent,
     FormularioChatComponent,
     MensajeComponent,
-    SalaChatComponent
+    SalaChatComponent,
+    EncuestaComponent,
+    CancelarTurnoComponent,
+    ListadoConsultoriosComponent,
+    HistoriaClinicaComponent,
+    FormularioHistoriaComponent,
+    ColorDirective,
+    FiltroTurnosComponent,
+    FechaTurnosComponent
   ],
   imports: [
     BrowserModule,
@@ -75,9 +85,10 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule   
+    AngularFirestoreModule,
+    RecaptchaModule.forRoot()   
   ],
-  providers: [AuthService, ChatService],
+  providers: [AuthService, ChatService, {provide: RECAPTCHA_LANGUAGE, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

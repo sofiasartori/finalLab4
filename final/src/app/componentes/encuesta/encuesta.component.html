@@ -1,0 +1,17 @@
+<div *ngIf="nuevaEncuesta">
+  <form [formGroup]="encuestaForm" class="modal-content animate" (ngSubmit)="completar()" >
+    <div class="container">
+      <label><b>Puntuación de la clínica:</b></label>
+      <input type="range" min="1" max="10" [(ngModel)]="nuevaEncuesta.clinica" [formControl]="clinica" required>
+      <label><b>Puntuación del especialista:</b></label>
+      <input type="range" min="1" max="10" [(ngModel)]="nuevaEncuesta.especialista" [formControl]="especialista" required>
+      <label><b>Comentarios:</b></label>
+      <div class="row align-items-center">
+        <textarea maxlength="66"[(ngModel)]="nuevaEncuesta.opinion" [formControl]="comentarios" required></textarea>
+      </div>
+      <div>
+        <button type="submit" [disabled]="!encuestaForm.valid">Completar encuesta</button>
+      </div>
+    </div>
+  </form>
+  </div>

@@ -6,6 +6,9 @@ import { Router, Data } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 import * as jwt_decode from "jwt-decode";
 
+export interface data{
+  respuesta: string
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,6 +21,8 @@ export class LoginComponent implements OnInit {
   emailLocal: string = 'email';
   tokenLocal: string = 'token';
   tipoLocal: string = 'tipo';
+  robot: boolean=true;
+  siteKeyCaptcha: string='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 
 
   constructor(serviceUsuario: registroUsuarioService, private builder: FormBuilder, private router: Router, authoService: AuthService) {
@@ -42,13 +47,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  public resolved(captchaResponse: string) {
+    this.miUsuarioServicio.enviarCaptcha(captchaResponse).subscribe((data: data) =>{
+      console.log(data);
+      if(data.respuesta == "No eres un robot")
+        this.robot = false;
+    });
+}
+
   login(){
     let respuesta: string;
     let token: any;
     let tipo: string;
-    this.usuario.ult_conexion_dia= new Date().getDate.toString();
-    this.usuario.ult_conexion_hora= new Date().getTime.toString();
-
     this.miUsuarioServicio.login('/login/', this.usuario).toPromise().then(response =>{
       respuesta = JSON.stringify(response);
       console.log("respuesta "+ respuesta);
@@ -63,5 +73,9 @@ export class LoginComponent implements OnInit {
       msg=>{
         this.router.navigate(['/errorLogin']);
       })
+  }
+
+  volverInicio(){
+    this.router.navigate(['/inicio']);
   }
 }

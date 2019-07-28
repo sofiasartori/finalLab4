@@ -10,14 +10,16 @@ export class ListarTurnoComponent implements OnInit {
 
   listado: any;
   miTurnoServicio: TurnoService;
+  recepcionista='';
   
 
   constructor(serviceTurno: TurnoService) {
     this.miTurnoServicio = serviceTurno;
-
-
   }
   ngOnInit() {
+    if(localStorage.getItem("tipo")==="recepcionista"){
+      this.recepcionista='ok';
+    }
     this.TraerTodos();
   }
   TraerTodos() {

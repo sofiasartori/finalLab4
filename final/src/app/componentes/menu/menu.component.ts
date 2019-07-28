@@ -11,6 +11,7 @@ export class MenuComponent implements OnInit {
 
   cliente='';
   administrador='';
+  recepcionista='';
   constructor(private router: Router) { }
   
 
@@ -18,17 +19,15 @@ export class MenuComponent implements OnInit {
     if(localStorage.getItem('tipo')=="cliente"){
       this.cliente='cliente';
     }
-    else{
+    else if(localStorage.getItem("tipo")==="administrador"){
       this.administrador='administrador';
     }
+    else
+      this.recepcionista="recepcionista";
   }
 
-  altaMascota(){
-    this.router.navigate(['/formularioMascota']);
-  }
-
-  listadoMascotas(){
-    this.router.navigate(['/listaMascota']);
+  listadoConsultorios(){
+    this.router.navigate(['/listaConsultorios']);
   }
 
   listadoTurnos(){

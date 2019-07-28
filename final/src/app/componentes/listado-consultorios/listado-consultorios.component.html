@@ -1,0 +1,18 @@
+<app-email-sesion></app-email-sesion><br>
+<app-boton-menu></app-boton-menu><br>
+<table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+    <thead>
+      <tr>
+        <th>Numero Consultorio</th>
+        <th>Estado</th>
+        <th>Atención</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let consultorio of listado" >
+        <td>{{consultorio.id_consultorio}} </td>
+        <td>{{consultorio.estado}} </td>
+        <td [appColor]="consultorio.atencion" >{{consultorio.atencion}} </td>
+      </tr>
+    </tbody>
+  </table>

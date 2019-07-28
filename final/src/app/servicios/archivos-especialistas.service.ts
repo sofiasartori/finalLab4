@@ -1,33 +1,27 @@
 import { Injectable } from '@angular/core';
 import { MiHttpService } from './mi-http.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArchivosTurnoService {
+export class ArchivosEspecialistasService {
 
-  //api = 'http://localhost/veterinaria/apirest.php/';
   api = 'http://localhost:8080/clinica/apirest.php/';
+  //apiJWT = 'http://localhost:8080/veterinaria/jwt/';
   peticion: any;
-  constructor( public miHttp: MiHttpService ) {
-  }
+  
+  constructor(public miHttp: MiHttpService, private http:HttpClient) { }
 
-
-  public traerTurnos(ruta) {
+  public traerUsuarios(ruta) {
     return this.miHttp.httpGetO(this.api + ruta)
     .toPromise()
     .then( data => {
-      console.log('Archivo turno');
+      console.log('Archivo productos');
      // console.log( data );
       return data;
     }, err => {
       console.log( err );
     })
-  }
-
-  public insertarTurno(ruta, objeto) {
-    console.log('objeto:' + JSON.stringify(objeto));
-    return this.miHttp.httpPostP(this.api + ruta, JSON.stringify(objeto));
-
   }
 }

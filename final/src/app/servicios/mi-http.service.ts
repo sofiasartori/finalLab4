@@ -84,6 +84,13 @@ export class MiHttpService {
     });
   }
 
+  public httpPutP ( url: string): Observable<any>
+  {
+    return this.http.put(url, '')
+      .map( ( res: Response ) => res)
+      .catch( ( err: any ) => throwError(err || 'Server error'));
+  }
+
   public httpGetO ( url: string): Observable<any>
   {
     return this.http.get( url )

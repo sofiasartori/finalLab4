@@ -14,6 +14,12 @@
         <input type="date" [(ngModel)]="nuevoTurno.dia" placeholder="dia" [formControl]="dia" required>
         <label>Hora:</label>
         <input type="time" [(ngModel)]="nuevoTurno.hora" placeholder="hora" [formControl]="hora" required>
+        <div class="form-group">
+          <label><b>Especialista:</b></label>
+          <select data-live-search="true" name="selectEspecialista" [(ngModel)]="idEspecialista" [formControl]="especialista">
+            <option *ngFor="let esp of especialistas" [value]="esp.id_usuario">{{esp.email}}</option>
+         </select>
+        </div>
         <div>
           <button type="submit" [disabled]="!altaTurnoForm.valid">Crear</button>
         </div>
