@@ -1,3 +1,6 @@
-<p>
-  filtro-turnos works!
-</p>
+<app-email-sesion></app-email-sesion><br>
+<app-boton-menu></app-boton-menu><br>
+
+<app-fecha-turnos (onDateSelected)="seleccionarFecha($event)"></app-fecha-turnos>
+<app-listar-turno *ngIf="filtro" [filtro]="filtro"></app-listar-turno>
+

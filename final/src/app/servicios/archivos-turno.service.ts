@@ -13,8 +13,8 @@ export class ArchivosTurnoService {
   }
 
 
-  public traerTurnos(ruta) {
-    return this.miHttp.httpGetO(this.api + ruta)
+  public traerTurnos(ruta, filtro) {
+    return this.miHttp.httpGetP(this.api + ruta, filtro)
     .toPromise()
     .then( data => {
       console.log('Archivo turno');
@@ -28,6 +28,11 @@ export class ArchivosTurnoService {
   public insertarTurno(ruta, objeto) {
     console.log('objeto:' + JSON.stringify(objeto));
     return this.miHttp.httpPostP(this.api + ruta, JSON.stringify(objeto));
+
+  }
+
+  public cambiarEstado(ruta, id) {
+    return this.miHttp.httpPut(this.api + ruta + id, '');
 
   }
 }

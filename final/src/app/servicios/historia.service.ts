@@ -8,7 +8,7 @@ export class HistoriaService {
 
   constructor(private miHttp: ArchivosHistoriaService) { }
 
-  insertar(ruta: string, usuario: any){
-    return this.miHttp.insertar('historia/alta/', usuario);
+  insertar(ruta: string, historia: any){
+    return this.miHttp.insertar('historia/alta/', historia);
    }
 }

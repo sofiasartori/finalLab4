@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filtro-turnos.component.css']
 })
 export class FiltroTurnosComponent implements OnInit {
-
+  filtro:string;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  seleccionarFecha(event){
+    this.filtro = event
   }
 
 }

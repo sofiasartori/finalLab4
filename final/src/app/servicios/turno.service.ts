@@ -13,13 +13,17 @@ export class TurnoService {
   filtrado: any;
 
   traertodos(ruta: string, filtro: string) {
-    return this.miHttp.traerTurnos('turnos/').then(data => {
+    return this.miHttp.traerTurnos('turnos/', filtro).then(data => {
       console.log('turnos service', data);
       return data;
     });
  }
  insertar(ruta: string, turno: any){
   return this.miHttp.insertarTurno('turnos/alta/', turno);
+ }
+
+ cambiarEstado(ruta: string, id:number){
+   return this.miHttp.cambiarEstado('turnos/', id);
  }
 
 }

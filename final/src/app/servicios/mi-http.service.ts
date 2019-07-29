@@ -20,7 +20,7 @@ export class MiHttpService {
 
   constructor( public http: HttpClient ) { }
 
-  public httpGetP ( url: string, id:number)
+  public httpGetP ( url: string, filtro:string)
   {
     /*return this.http
     .get( url + descripcion)
@@ -28,7 +28,7 @@ export class MiHttpService {
     .then( this.extractData )
     .catch( this.handleError );*/
     
-    return this.http.get( url + id)
+    return this.http.get( url + filtro)
       .map( ( res: Response ) => res)
       .catch( ( err: any ) => throwError(err || 'Server error'));
   }

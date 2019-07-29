@@ -1,3 +1,4 @@
-<p>
-  fecha-turnos works!
-</p>
+<div style="padding: 20px">
+  <label style="font-weight: bold; margin-right: 10px">Tipo</label>
+  <input type="date" [(ngModel)]="filtro" (change)="seleccionarFecha(filtro)">
+</div>

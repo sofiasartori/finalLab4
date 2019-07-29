@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HistoriaService } from 'src/app/servicios/historia.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Historia } from 'src/app/clases/historia';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-historia',
@@ -9,12 +11,10 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class FormularioHistoriaComponent implements OnInit {
 
-  @Input() cliente: string;
-  comentario: string;
   miHistoriaServicio: HistoriaService;
-  nuevaHistoria: any;
+  nuevaHistoria: Historia;
 
-  constructor(serviceHistoria: HistoriaService, private builder: FormBuilder) {
+  constructor(serviceHistoria: HistoriaService, private builder: FormBuilder, private router: Router) {
     this.miHistoriaServicio = serviceHistoria;
    }
 
@@ -24,16 +24,20 @@ export class FormularioHistoriaComponent implements OnInit {
   
   
   historiaForm: FormGroup = this.builder.group({
-    observaciones: this.comentario
+    observaciones: this.observaciones
   });
 
   ngOnInit() {
+    this.nuevaHistoria=new Historia("", "", "");
   }
 
   completarHistoria(){
-    this.nuevaHistoria={"cliente": this.cliente, "dentista":localStorage.getItem('email'), "comentario": this.observaciones};
+    this.nuevaHistoria.cliente=localStorage.getItem('cliente');
+    this.nuevaHistoria.dentista=localStorage.getItem('email');
     this.miHistoriaServicio.insertar('historia/', this.nuevaHistoria);
+    localStorage.removeItem('cliente');
     this.nuevaHistoria=null;
+    this.router.navigate(['/menu']);
   }
 
 }

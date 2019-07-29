@@ -34,6 +34,7 @@ import { FormularioHistoriaComponent } from './componentes/formulario-historia/f
 import { ColorDirective } from './color.directive';
 import { FiltroTurnosComponent } from './componentes/filtro-turnos/filtro-turnos.component';
 import { FechaTurnosComponent } from './componentes/fecha-turnos/fecha-turnos.component';
+import { AtenderPacienteComponent } from './componentes/atender-paciente/atender-paciente.component';
 
 
 const appRoutes: Routes = [
@@ -49,7 +50,9 @@ const appRoutes: Routes = [
   { path: 'listaTurno',  component: ListarTurnoComponent, canActivate: [AuthGuard]},
   { path: 'menu',  component: MenuComponent, canActivate: [AuthGuard]},
   { path: 'chat',  component: SalaChatComponent, canActivate:[AuthGuard]},
-  { path: 'listaConsultorios',  component: ListadoConsultoriosComponent, canActivate:[AuthGuard]}
+  { path: 'listaConsultorios',  component: ListadoConsultoriosComponent, canActivate:[AuthGuard]},
+  { path: 'listaTurnos',  component: FiltroTurnosComponent, canActivate:[AuthGuard]},
+  { path: 'historiaClinica',  component: FormularioHistoriaComponent, canActivate:[AuthGuard]}
   //{ path: '**', component: ErrorComponent }
 ];
 
@@ -75,7 +78,8 @@ const appRoutes: Routes = [
     FormularioHistoriaComponent,
     ColorDirective,
     FiltroTurnosComponent,
-    FechaTurnosComponent
+    FechaTurnosComponent,
+    AtenderPacienteComponent
   ],
   imports: [
     BrowserModule,

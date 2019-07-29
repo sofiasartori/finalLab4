@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TurnoService } from '../../servicios/turno.service';
 
 @Component({
@@ -8,9 +8,11 @@ import { TurnoService } from '../../servicios/turno.service';
 })
 export class ListarTurnoComponent implements OnInit {
 
+  @Input() filtro:string;
   listado: any;
   miTurnoServicio: TurnoService;
   recepcionista='';
+  especialista='';
   
 
   constructor(serviceTurno: TurnoService) {
@@ -20,12 +22,17 @@ export class ListarTurnoComponent implements OnInit {
     if(localStorage.getItem("tipo")==="recepcionista"){
       this.recepcionista='ok';
     }
+    else{
+      this.especialista='ok';
+    }
     this.TraerTodos();
   }
   TraerTodos() {
-    this.miTurnoServicio.traertodos('turnos/', '').then(data => {
+    this.miTurnoServicio.traertodos('turnos/', this.filtro).then(data => {
       this.listado = data
       console.log(data)
     })
   }
+
+  
 }

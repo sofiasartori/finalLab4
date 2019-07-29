@@ -1,20 +1,30 @@
-<app-email-sesion></app-email-sesion><br>
-<app-boton-menu></app-boton-menu><br>
+<app-email-sesion *ngIf="!especialista"></app-email-sesion><br>
+<app-boton-menu *ngIf="!especialista"></app-boton-menu><br>
 <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
     <thead>
       <tr>
         <th>Dia</th>
         <th>Hora</th>
-        <th>Dueño</th>
+        <th *ngIf="recepcionista || especialista">Cliente</th>
+        <th *ngIf="recepcionista || especialista">Recepcionista</th>
+        <th>Consultorio</th>
+        <th>Estado</th>
+        <th *ngIf="recepcionista || especialista">Tratamiento</th>
         <th *ngIf="recepcionista">Cancelar Turno</th>
+        <th *ngIf="especialista">Atender paciente</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let turno of listado" >
         <td>{{turno.dia}} </td>
         <td>{{turno.hora}} </td>
-        <td>{{turno.duenio}} </td>
+        <td *ngIf="recepcionista || especialista">{{turno.cliente}} </td>
+        <td *ngIf="recepcionista || especialista">{{turno.recepcionista}} </td>
+        <td>{{turno.id_consultorio}}</td>
+        <td>{{turno.estado}}</td>
+        <td *ngIf="recepcionista || especialista">{{turno.id_tratamiento}} </td>
         <td *ngIf="recepcionista"><app-cancelar-turno></app-cancelar-turno></td>
+        <td *ngIf="especialista && turno.estado!='atendido'"><app-atender-paciente [paciente]="turno.cliente" [idTurno]="turno.id_turno"></app-atender-paciente></td>
       </tr>
     </tbody>
   </table>

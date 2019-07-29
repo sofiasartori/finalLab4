@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-fecha-turnos',
@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fecha-turnos.component.css']
 })
 export class FechaTurnosComponent implements OnInit {
-
-  constructor() { }
+  @Output() onDateSelected: EventEmitter<any> = new EventEmitter<any>();
+  filtro:string;
+  constructor() { }  
 
   ngOnInit() {
   }
+
+  seleccionarFecha(filtro) {
+    this.onDateSelected.emit(filtro)
+  }  
 
 }

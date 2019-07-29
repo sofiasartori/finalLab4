@@ -11,6 +11,7 @@ export class MenuComponent implements OnInit {
 
   cliente='';
   administrador='';
+  especialista='';
   recepcionista='';
   constructor(private router: Router) { }
   
@@ -19,8 +20,8 @@ export class MenuComponent implements OnInit {
     if(localStorage.getItem('tipo')=="cliente"){
       this.cliente='cliente';
     }
-    else if(localStorage.getItem("tipo")==="administrador"){
-      this.administrador='administrador';
+    else if(localStorage.getItem("tipo")==="especialista"){
+      this.especialista='especialista';
     }
     else
       this.recepcionista="recepcionista";
@@ -40,6 +41,10 @@ export class MenuComponent implements OnInit {
 
   chat(){
     this.router.navigate(['/chat']);
+  }
+
+  listaTurnos(){
+    this.router.navigate(['/listaTurnos']);
   }
 
 }
