@@ -1,17 +1,13 @@
 <?php
 require_once ('AccesoDatos.php');
-class Usuario
+class Especialista
 {
 	public $email;
-	public $password;
 	public $tipo;
-	public $foto;
-	public $ult_conexion_dia;
-	public $ult_conexion_hora;
 	
     public function traerTodosUsuarios(){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM final.usuarios");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT id_usuario, email FROM clinica.usuarios WHERE tipo='especialista'");
 		$consulta->execute();
 		
 
@@ -35,7 +31,7 @@ class Usuario
 	public function insertarUsuario($request){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			var_dump($request);
-			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into final.usuarios (email, password, tipo, foto) values (:email, :password, :tipo, :foto);");
+			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into clinica.usuarios (email, password, tipo, foto) values (:email, :password, :tipo, :foto);");
 			$itemsUsuario->bindValue(':email', $request['email'], PDO::PARAM_STR);
 			$itemsUsuario->bindValue(':password', $request['password'], PDO::PARAM_STR);
 			$itemsUsuario->bindValue(':tipo', $request['tipo'], PDO::PARAM_STR);
@@ -46,21 +42,21 @@ class Usuario
 
 	public function borrarUsuario($id){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM final.usuarios where id=$id");
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM clinica.usuarios where id=$id");
 		$consulta->execute();
 	}
 
 	public function buscarUsuario($email, $password){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM final.usuarios where email='$email' AND password='$password'");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.usuarios where email='$email' AND password='$password'");
 		$consulta->execute();
 		$usuarioBuscado=$consulta->fetchObject('Usuario');
 		return $usuarioBuscado;
 	}
 
-	public function logConexion($fecha, $hora){
+	public function logConexion($email){
 		$objetoAccesoDato= AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("INSERT into final.usuarios (ult_conexion_dia, ult_conexion_hora) values('$fecha', '$hora');");
+		$consulta=$objetoAccesoDato->RetornarConsulta("UPDATE clinica.usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP() WHERE email='$email';");
 		$consulta->execute();
 	}
 }

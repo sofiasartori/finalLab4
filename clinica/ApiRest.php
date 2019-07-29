@@ -6,10 +6,14 @@ require 'vendor/autoload.php';
 require_once 'AccesoDatos.php';
 require_once 'usuarioApi.php';
 include_once 'usuario.php';
-require_once 'mascotaApi.php';
-include_once 'mascota.php';
+require_once 'especialistaApi.php';
+include_once 'especialista.php';
 require_once 'turnoApi.php';
 include_once 'turno.php';
+require_once 'consultorioApi.php';
+include_once 'consultorio.php';
+require_once 'historiaApi.php';
+include_once 'historia.php';
 require_once 'MWparaCORS.php';
 require_once 'jwt.php';
 require_once 'mw.php';
@@ -38,16 +42,16 @@ $app->post('/login/', function(Request $request, Response $response){
 	}
 	else{
 		$token= JsonWToken::LogIn($data);
-		$usuario->LogConexion($datos['ult_conexion_fecha'], $datos['ult_conexion_hora']);
+		$usuario->LogConexion($datos['email']);
   		$newResponse = $response->withJson($token, 200); 
 	}
 	return $newResponse;	  
 	
 })->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
-$app->group('/mascotas', function () {
+$app->group('/especialistas', function () {
 
-  $this->get('/', \MascotaApi::class . ':traerTodos');
+  $this->get('/', \EspecialistaApi::class . ':traerTodos');
   $this->get('/{id}', \MascotaApi::class . ':buscarUno');
   $this->post('/alta/', \MascotaApi::class . ':CargarUno');  
   $this->put('/', \MascotaApi::class . ':ModificarUno');
@@ -55,8 +59,21 @@ $app->group('/mascotas', function () {
 
 $app->group('/turnos', function () {
 
-  $this->get('/', \TurnoApi::class . ':traerTodos');
+  $this->get('/{filtro}', \TurnoApi::class . ':traerTodos');
   $this->post('/alta/', \TurnoApi::class . ':CargarUno');  
+  $this->put('/{id}', \TurnoApi::class . ':ModificarUno');
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+$app->group('/consultorios', function () {
+
+  $this->get('/', \ConsultorioApi::class . ':traerTodos');
+  $this->put('/{id_consultorio}/{estado}/{atencion}', \ConsultorioApi::class . ':ModificarUno');  
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+$app->group('/historia', function () {
+
+  $this->get('/', \HistoriaApi::class . ':traerTodos');
+  $this->post('/alta/', \HistoriaApi::class . ':CargarUno');  
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->run();

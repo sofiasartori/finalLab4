@@ -1,0 +1,15 @@
+del cliente falta:
+-disp de esp 
+-mostrarle codigo del consultorio al pedir turno 
+-filtrar sus turnos 
+-sólo puede hacer la encuesta si fue atendido/conectar servicio de encuesta
+-que vea la historia clinica
+
+al dar de alta un especialista, debería poder ponerse su disponibilidad
+administrador: dar de altas a tratamientos
+
+del recepcionista falta:
+-dar turnos por cliente y tratamiento
+-conectar servicio en cancelar turno
+
+en el header, mostrar foto del usuario
