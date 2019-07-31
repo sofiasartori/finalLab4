@@ -35,6 +35,14 @@ import { ColorDirective } from './color.directive';
 import { FiltroTurnosComponent } from './componentes/filtro-turnos/filtro-turnos.component';
 import { FechaTurnosComponent } from './componentes/fecha-turnos/fecha-turnos.component';
 import { AtenderPacienteComponent } from './componentes/atender-paciente/atender-paciente.component';
+import { DialogoTurnoComponent } from './componentes/dialogo-turno/dialogo-turno.component';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { BotonEncuestaComponent } from './componentes/boton-encuesta/boton-encuesta.component';
+import { VerHistoriasComponent } from './componentes/ver-historias/ver-historias.component';
+import { DisponibilidadComponent } from './componentes/disponibilidad/disponibilidad.component';
+import { AltaTratamientoComponent } from './componentes/alta-tratamiento/alta-tratamiento.component';
+import { TratamientoService } from './servicios/tratamiento.service';
+import { AltaEspecialidadComponent } from './componentes/alta-especialidad/alta-especialidad.component';
 
 
 const appRoutes: Routes = [
@@ -52,7 +60,12 @@ const appRoutes: Routes = [
   { path: 'chat',  component: SalaChatComponent, canActivate:[AuthGuard]},
   { path: 'listaConsultorios',  component: ListadoConsultoriosComponent, canActivate:[AuthGuard]},
   { path: 'listaTurnos',  component: FiltroTurnosComponent, canActivate:[AuthGuard]},
-  { path: 'historiaClinica',  component: FormularioHistoriaComponent, canActivate:[AuthGuard]}
+  { path: 'historiaClinica',  component: FormularioHistoriaComponent, canActivate:[AuthGuard]},
+  { path: 'encuesta/:idTurno',  component: EncuestaComponent, canActivate:[AuthGuard]},
+  { path: 'historiaCliente',  component: VerHistoriasComponent, canActivate:[AuthGuard]},
+  { path: 'disponibilidad',  component: DisponibilidadComponent, canActivate:[AuthGuard]},
+  { path: 'tratamiento',  component: AltaTratamientoComponent, canActivate:[AuthGuard]},
+  { path: 'especialidad',  component: AltaEspecialidadComponent, canActivate:[AuthGuard]}
   //{ path: '**', component: ErrorComponent }
 ];
 
@@ -79,7 +92,13 @@ const appRoutes: Routes = [
     ColorDirective,
     FiltroTurnosComponent,
     FechaTurnosComponent,
-    AtenderPacienteComponent
+    AtenderPacienteComponent,
+    DialogoTurnoComponent,
+    BotonEncuestaComponent,
+    VerHistoriasComponent,
+    DisponibilidadComponent,
+    AltaTratamientoComponent,
+    AltaEspecialidadComponent
   ],
   imports: [
     BrowserModule,
@@ -90,9 +109,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    RecaptchaModule.forRoot()   
+    RecaptchaModule.forRoot(),
+    MatDialogModule
   ],
-  providers: [AuthService, ChatService, {provide: RECAPTCHA_LANGUAGE, useValue: 'es'}],
+  providers: [AuthService, ChatService, {provide: RECAPTCHA_LANGUAGE, useValue: 'es'}, { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: []}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

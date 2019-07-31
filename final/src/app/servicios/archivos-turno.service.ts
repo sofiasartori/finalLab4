@@ -31,8 +31,8 @@ export class ArchivosTurnoService {
 
   }
 
-  public cambiarEstado(ruta, id) {
-    return this.miHttp.httpPut(this.api + ruta + id, '');
+  public cambiarEstado(ruta, objeto) {
+    return this.miHttp.httpPut(this.api + ruta, objeto);
 
   }
 }

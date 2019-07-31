@@ -1,12 +1,14 @@
 del cliente falta:
 -disp de esp 
--mostrarle codigo del consultorio al pedir turno 
--filtrar sus turnos 
--sólo puede hacer la encuesta si fue atendido/conectar servicio de encuesta
--que vea la historia clinica
+-mostrarle codigo del consultorio al pedir turno (ver lo del modal)
+-filtrar sus turnos (OK) 
+-ver la tabla por que se rompe
+-sólo puede hacer la encuesta si fue atendido (OK)/conectar servicio de encuesta(OK)
+-que vea la historia clinica (OK)
 
 al dar de alta un especialista, debería poder ponerse su disponibilidad
-administrador: dar de altas a tratamientos
+administrador: dar de altas a tratamientos (OK)
+dar de alta especialidades(OK)
 
 del recepcionista falta:
 -dar turnos por cliente y tratamiento

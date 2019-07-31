@@ -9,6 +9,6 @@ export class EncuestaService {
   constructor(public miHttp: ArchivosEncuestaService) { }
 
   insertar(ruta: string, encuesta: any){
-    return this.miHttp.insertarEncuesta('encuestas/', encuesta);
+    return this.miHttp.insertarEncuesta(ruta, encuesta);
    }
 }

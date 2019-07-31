@@ -1,4 +1,8 @@
-<div *ngIf="nuevaEncuesta">
+<!--<div *ngIf="idTurno">
+  <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevaEncuesta()">Tomar encuesta</button>
+</div>-->
+
+<div *ngIf="idTurno">
   <form [formGroup]="encuestaForm" class="modal-content animate" (ngSubmit)="completar()" >
     <div class="container">
       <label><b>Puntuación de la clínica:</b></label>

@@ -4,6 +4,8 @@ import { TurnoService } from '../../servicios/turno.service';
 import { Turno } from '../../clases/turno';
 import { EspecialidadesService } from 'src/app/servicios/especialista.service';
 import { ConsultoriosService } from 'src/app/servicios/consultorios.service';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogoTurnoComponent } from '../dialogo-turno/dialogo-turno.component';
 
 @Component({
   selector: 'app-pedir-turno',
@@ -20,7 +22,7 @@ export class PedirTurnoComponent implements OnInit {
   idEspecialista: number;
   miConsultorioServicio: ConsultoriosService;
   
-  constructor(serviceTurno: TurnoService, private builder: FormBuilder, serviceEspecialidad: EspecialidadesService, serviceConsultorio: ConsultoriosService) {
+  constructor(serviceTurno: TurnoService, private builder: FormBuilder, serviceEspecialidad: EspecialidadesService, serviceConsultorio: ConsultoriosService, private dialogo: MatDialog) {
     this.miTurnoServicio = serviceTurno;
     this.miEspecialista = serviceEspecialidad;
     this.miConsultorioServicio = serviceConsultorio;
@@ -63,6 +65,7 @@ export class PedirTurnoComponent implements OnInit {
     this.miTurnoServicio.insertar('turnos/alta/', this.nuevoTurno);
     this.cambiarEstadoConsultorio();
     this.nuevoTurno=null;
+    this.abrirDialogo();
   }
   hacerNuevoTurno()
   {
@@ -78,6 +81,10 @@ export class PedirTurnoComponent implements OnInit {
 
   cambiarEstadoConsultorio(){
     this.miConsultorioServicio.cambiarEstado(this.nuevoTurno.id_consultorio , '','Proximo_a_ocupar');
+  }
+
+  abrirDialogo() {
+    this.dialogo.open(DialogoTurnoComponent);
   }
 
 }

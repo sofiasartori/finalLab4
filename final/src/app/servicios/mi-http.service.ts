@@ -74,6 +74,7 @@ export class MiHttpService {
 
   public httpPut( url: string, objeto: any )
   {
+    console.log(objeto);
     let header = new Headers();
     header.set
     return this.http
