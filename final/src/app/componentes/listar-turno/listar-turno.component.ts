@@ -25,14 +25,27 @@ export class ListarTurnoComponent implements OnInit {
     else{
       this.especialista='ok';
     }
-    this.TraerTodos();
+    if(!this.especialista){
+      this.TraerTodos();  
+    }
+    else{
+      this.TraerPorFecha();
+    }
+    
+    
   }
   TraerTodos() {
-    this.miTurnoServicio.traertodos('turnos/', this.filtro).then(data => {
+    this.miTurnoServicio.traertodos('turnos/', '').then(data => {
       this.listado = data
       console.log(data)
     })
   }
 
+  TraerPorFecha() {
+    this.miTurnoServicio.traertodos('turnos/', this.filtro).then(data => {
+      this.listado = data
+      console.log(data)
+    })
+  }
   
 }
