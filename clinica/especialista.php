@@ -7,7 +7,7 @@ class Especialista
 	
     public function traerTodosUsuarios(){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT id_usuario, email FROM clinica.usuarios WHERE tipo='especialista'");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT id_usuario, email FROM id9856454_clinica.usuarios WHERE tipo='especialista'");
 		$consulta->execute();
 		
 
@@ -31,7 +31,7 @@ class Especialista
 	public function insertarUsuario($request){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			var_dump($request);
-			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into clinica.usuarios (email, password, tipo, foto) values (:email, :password, :tipo, :foto);");
+			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into id9856454_clinica.usuarios (email, password, tipo, foto) values (:email, :password, :tipo, :foto);");
 			$itemsUsuario->bindValue(':email', $request['email'], PDO::PARAM_STR);
 			$itemsUsuario->bindValue(':password', $request['password'], PDO::PARAM_STR);
 			$itemsUsuario->bindValue(':tipo', $request['tipo'], PDO::PARAM_STR);
@@ -42,13 +42,13 @@ class Especialista
 
 	public function borrarUsuario($id){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM clinica.usuarios where id=$id");
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM id9856454_clinica.usuarios where id=$id");
 		$consulta->execute();
 	}
 
 	public function buscarUsuario($email, $password){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.usuarios where email='$email' AND password='$password'");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM id9856454_clinica.usuarios where email='$email' AND password='$password'");
 		$consulta->execute();
 		$usuarioBuscado=$consulta->fetchObject('Usuario');
 		return $usuarioBuscado;
@@ -56,7 +56,7 @@ class Especialista
 
 	public function logConexion($email){
 		$objetoAccesoDato= AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("UPDATE clinica.usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP() WHERE email='$email';");
+		$consulta=$objetoAccesoDato->RetornarConsulta("UPDATE id9856454_clinica.usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP() WHERE email='$email';");
 		$consulta->execute();
 	}
 }

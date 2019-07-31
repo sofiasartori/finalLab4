@@ -9,7 +9,7 @@ import { MiHttpService } from './mi-http.service';
 export class ArchivosUsuarioService {
 
   //api = 'http://localhost/veterinaria/apirest.php/';
-  api = 'http://localhost:8080/clinica/apirest.php/';
+  api = 'https://finallab4.000webhostapp.com/clinica/apirest.php/';
   //apiJWT = 'http://localhost:8080/veterinaria/jwt/';
   peticion: any;
   private urlBase: string;

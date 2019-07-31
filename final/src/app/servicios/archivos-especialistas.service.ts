@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ArchivosEspecialistasService {
 
-  api = 'http://localhost:8080/clinica/apirest.php/';
+  api = 'https://finallab4.000webhostapp.com/clinica/apirest.php/';
   //apiJWT = 'http://localhost:8080/veterinaria/jwt/';
   peticion: any;
   

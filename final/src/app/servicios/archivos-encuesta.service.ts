@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ArchivosEncuestaService {
 
-  api = 'http://localhost:8080/clinica/apirest.php/';
+  api = 'https://finallab4.000webhostapp.com/clinica/apirest.php/';
   constructor(public miHttp: MiHttpService, private http:HttpClient ) { }
 
 

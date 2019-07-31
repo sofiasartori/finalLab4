@@ -7,7 +7,7 @@ import { MiHttpService } from './mi-http.service';
 export class ArchivosTurnoService {
 
   //api = 'http://localhost/veterinaria/apirest.php/';
-  api = 'http://localhost:8080/clinica/apirest.php/';
+  api = 'https://finallab4.000webhostapp.com/clinica/apirest.php/';
   peticion: any;
   constructor( public miHttp: MiHttpService ) {
   }

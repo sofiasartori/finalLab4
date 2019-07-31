@@ -14,7 +14,7 @@ class Turno
 	
     public function traerTodosTurnos($filtro){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.turnos WHERE dia='$filtro'");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM id9856454_clinica.turnos WHERE dia='$filtro'");
 		$consulta->execute();
 		
 
@@ -38,7 +38,7 @@ class Turno
 	public function insertarTurno($request){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			var_dump($request);
-			$itemsTurno = $objetoAccesoDato->RetornarConsulta("INSERT into clinica.turnos (dia, hora, id_especialista, cliente, id_consultorio, estado) values (:dia, :hora, :id_especialista, :cliente, :id_consultorio, 'asignado');");
+			$itemsTurno = $objetoAccesoDato->RetornarConsulta("INSERT into id9856454_clinica.turnos (dia, hora, id_especialista, cliente, id_consultorio, estado) values (:dia, :hora, :id_especialista, :cliente, :id_consultorio, 'asignado');");
 			$itemsTurno->bindValue(':dia', $request['dia'], PDO::PARAM_STR);
 			$itemsTurno->bindValue(':hora', $request['hora'], PDO::PARAM_STR);
 			$itemsTurno->bindValue(':id_especialista', $request['id_especialista'], PDO::PARAM_INT);
@@ -49,7 +49,7 @@ class Turno
 
 	public function modificarEstado($id){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$itemsTurno = $objetoAccesoDato->RetornarConsulta("UPDATE clinica.turnos SET estado='atendido' where id_turno=$id");
+		$itemsTurno = $objetoAccesoDato->RetornarConsulta("UPDATE id9856454_clinica.turnos SET estado='atendido' where id_turno=$id");
 		$itemsTurno->execute();
 	}
 

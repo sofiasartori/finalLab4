@@ -8,7 +8,7 @@ class Historia
 	
     public function traerTodos($request, $response, $args){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT id_consultorio, estado, atencion FROM clinica.consultorios");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT id_consultorio, estado, atencion FROM id9856454_clinica.consultorios");
 		$consulta->execute();
 		
 
@@ -32,7 +32,7 @@ class Historia
 	public function insertarHistoria($request){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			var_dump($request);
-			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into clinica.historia_clinica (cliente, dentista, comentario) values (:cliente, :dentista, :comentario);");
+			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into id9856454_clinica.historia_clinica (cliente, dentista, comentario) values (:cliente, :dentista, :comentario);");
 			$itemsUsuario->bindValue(':cliente', $request['cliente'], PDO::PARAM_STR);
 			$itemsUsuario->bindValue(':dentista', $request['dentista'], PDO::PARAM_STR);
 			$itemsUsuario->bindValue(':comentario', $request['comentario'], PDO::PARAM_STR);
@@ -42,13 +42,13 @@ class Historia
 
 	public function borrarUsuario($id){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM clinica.usuarios where id=$id");
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM id9856454_clinica.usuarios where id=$id");
 		$consulta->execute();
 	}
 
 	public function buscarUsuario($email, $password){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.usuarios where email='$email' AND password='$password'");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM id9856454_clinica.usuarios where email='$email' AND password='$password'");
 		$consulta->execute();
 		$usuarioBuscado=$consulta->fetchObject('Usuario');
 		return $usuarioBuscado;
@@ -57,12 +57,12 @@ class Historia
 	public function modificarEstado($id, $estado, $atencion){
 		if($atencion=='Proximo_a_ocupar'){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE clinica.consultorios set atencion='$atencion' WHERE id_consultorio=$id");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE id9856454_clinica.consultorios set atencion='$atencion' WHERE id_consultorio=$id");
 			$consulta->execute();	
 		}
 		else{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE clinica.consultorios set estado='$estado', atencion='' WHERE id_consultorio=$id");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE id9856454_clinica.consultorios set estado='$estado', atencion='' WHERE id_consultorio=$id");
 			$consulta->execute();
 		}
 		
@@ -72,7 +72,7 @@ class Historia
 
 	public function logConexion($email){
 		$objetoAccesoDato= AccesoDatos::dameUnObjetoAcceso();
-		$consulta=$objetoAccesoDato->RetornarConsulta("UPDATE clinica.usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP() WHERE email='$email';");
+		$consulta=$objetoAccesoDato->RetornarConsulta("UPDATE id9856454_clinica.usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP() WHERE email='$email';");
 		$consulta->execute();
 	}
 }
