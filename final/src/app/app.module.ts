@@ -48,6 +48,7 @@ import { EstadisticasEmpleadosComponent } from './componentes/estadisticas-emple
 import { EstadisticasTurnosComponent } from './componentes/estadisticas-turnos/estadisticas-turnos.component';
 import { AgmCoreModule } from '@agm/core';
 import { Angular2CsvModule } from 'angular2-csv';
+import { CaptchaComponent } from './componentes/captcha/captcha.component';
 
 
 const appRoutes: Routes = [
@@ -68,7 +69,7 @@ const appRoutes: Routes = [
   { path: 'historiaClinica',  component: FormularioHistoriaComponent, canActivate:[AuthGuard]},
   { path: 'encuesta/:idTurno',  component: EncuestaComponent, canActivate:[AuthGuard]},
   { path: 'historiaCliente',  component: VerHistoriasComponent, canActivate:[AuthGuard]},
-  { path: 'disponibilidad',  component: DisponibilidadComponent, canActivate:[AuthGuard]},
+  { path: 'disponibilidad/:id_usuario',  component: DisponibilidadComponent},
   { path: 'tratamiento',  component: AltaTratamientoComponent, canActivate:[AuthGuard]},
   { path: 'especialidad',  component: AltaEspecialidadComponent, canActivate:[AuthGuard]},
   { path: 'estadisticasEmpleados',  component: EstadisticasEmpleadosComponent, canActivate:[AuthGuard]},
@@ -109,7 +110,8 @@ const appRoutes: Routes = [
     AltaEspecialidadComponent,
     ContactoComponent,
     EstadisticasEmpleadosComponent,
-    EstadisticasTurnosComponent
+    EstadisticasTurnosComponent,
+    CaptchaComponent
   ],
   imports: [
     BrowserModule,

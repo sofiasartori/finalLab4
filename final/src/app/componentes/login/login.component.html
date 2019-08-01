@@ -7,9 +7,10 @@
       <label>Password:
         <input type="password" [(ngModel)]="usuario.password" placeholder="password" [formControl]="password" required>
       </label>
-      <div class="row align-items-center">
+      <!--<div class="row align-items-center">
         <re-captcha (resolved)="resolved($event)" siteKey="{{siteKeyCaptcha}}"></re-captcha>
-      </div>
+      </div>-->
+      <app-captcha></app-captcha>
       <div>
         <button type="submit" [disabled]="!loginForm.valid">Login</button>
       </div>

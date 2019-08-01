@@ -45,6 +45,13 @@ export class MiHttpService {
     });
   }
 
+  public httpPostObs(url: string, objeto: any) {
+    let header = new Headers();
+    header.set
+    return this.http
+      .post(url, objeto, this.options)
+  }
+
   public httpPostP2( url: string, objeto: any )
   {
     console.log("objeto" + objeto)

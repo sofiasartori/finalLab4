@@ -61,4 +61,16 @@ export class ArchivosUsuarioService {
     return this.http
     .post( this.urlBase + url , objeto );
   }
+
+  public obtenerId(ruta, email){
+    return this.miHttp.httpGetP(this.api + ruta, email)
+    .toPromise()
+    .then( data => {
+      console.log('Archivo productos');
+      //console.log( data );
+      return data;
+    }, err => {
+      console.log( err );
+    })
+  }
 }

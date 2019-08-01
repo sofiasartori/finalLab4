@@ -37,4 +37,8 @@ export class registroUsuarioService {
   };
   return this.miHttp.httpPostPSinSubscripcion("captcha/", data);
 }
+
+obtenerId(ruta:string, email:string){
+  return this.miHttp.obtenerId('usuarios/id/', email);
+}
 }

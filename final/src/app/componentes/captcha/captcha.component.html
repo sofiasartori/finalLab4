@@ -1,0 +1,7 @@
+<div class="antibot justify-content-between">
+    <span>{{ code1 }} + {{ code2 }} = </span>
+    <input type="text" class="text-center form-control" id="code" name="code" [(ngModel)]="respuesta" required>
+    <div *ngIf="error"  class="text-center alert alert-danger" role="alert" >
+      <span>{{ error }}</span> 
+    </div>
+  </div>
