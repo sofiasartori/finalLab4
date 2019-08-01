@@ -20,10 +20,5 @@ export class InicioComponent implements OnInit {
   abrirLogin(){
     this.router.navigate(['/login']);
   }
-
-  abrirForm(){
-    this.router.navigate(['/formulario-usuario']);
-  }
-
   
 }

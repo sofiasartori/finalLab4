@@ -24,8 +24,18 @@
           </div>
         </div>
       <div>
-        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+        
+
+        <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Login
+          </button>
       </div>
+      <div *ngIf="loading">
+          <div class="spinner-grown text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
   </form>
   </div>
 

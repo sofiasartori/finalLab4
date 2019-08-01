@@ -5,7 +5,6 @@ import { registroUsuarioService } from '../../servicios/registro-usuario.service
 import { Router, Data } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 import * as jwt_decode from "jwt-decode";
-import { CaptchaComponent } from '../captcha/captcha.component';
 
 export interface data{
   respuesta: string
@@ -26,12 +25,14 @@ export class LoginComponent implements OnInit {
   codigo2: number;
   error: string;
   respuestaCaptcha: number;
+  loading: any;
 
   constructor(serviceUsuario: registroUsuarioService, private builder: FormBuilder, private router: Router, authoService: AuthService) {
     this.miUsuarioServicio = serviceUsuario;
     this.usuario.email='';
     this.codigo1 = Math.floor((Math.random() * 20) + 1);
-  	this.codigo2 = Math.floor((Math.random() * 20) + 1);
+    this.codigo2 = Math.floor((Math.random() * 20) + 1);    
+    this.loading=true;
    }
 
   email = new FormControl('', [
@@ -62,26 +63,28 @@ export class LoginComponent implements OnInit {
     let tipo: string;
     let foto: string;
   	if((this.codigo1 + this.codigo2) == this.respuestaCaptcha) {
-                this.respuestaCaptcha = null;
-                this.miUsuarioServicio.login('/login/', this.usuario).toPromise().then(response =>{
-                  respuesta = JSON.stringify(response);
-                  console.log("respuesta "+ respuesta);
-                  localStorage.setItem(this.emailLocal, this.usuario.email);
-                  localStorage.setItem(this.tokenLocal, respuesta);
-                  token = jwt_decode(respuesta);
-                  tipo = token.data.Tipo;
-                  foto=token.data.Foto;
-                  localStorage.setItem(this.tipoLocal, tipo);
-                  localStorage.setItem('foto', foto);
-                  this.router.navigate(['/menu']);
-                  
+                setTimeout(()=>{
+                  this.loading=false;
+                  this.respuestaCaptcha = null;
+                  this.miUsuarioServicio.login('/login/', this.usuario).toPromise().then(response =>{
+                    respuesta = JSON.stringify(response);
+                    console.log("respuesta "+ respuesta);
+                    localStorage.setItem(this.emailLocal, this.usuario.email);
+                    localStorage.setItem(this.tokenLocal, respuesta);
+                    token = jwt_decode(respuesta);
+                    tipo = token.data.Tipo;
+                    foto=token.data.Foto;
+                    localStorage.setItem(this.tipoLocal, tipo);
+                    localStorage.setItem('foto', foto);
+                    this.router.navigate(['/menu']);                  
                   },
                   msg=>{
                     this.router.navigate(['/errorLogin']);
                   })
-              }else {
-  		this.error = "Captcha invalido!";
-  	}  	
+              }, 4000)}else {
+  		          this.error = "Captcha invalido!";
+  	            }  	
+                
       
     
   }

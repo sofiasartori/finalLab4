@@ -1,5 +1,4 @@
-<app-email-sesion></app-email-sesion><br>
-<app-boton-menu></app-boton-menu><br>
+<app-menu></app-menu>
 <div *ngIf="!nuevoTurno">
 
 
@@ -9,33 +8,35 @@
   </div>
   <div *ngIf="nuevoTurno">
     <form [formGroup]="altaTurnoForm" class="modal-content animate" (ngSubmit)="crearTurno()" >
-      <div class="container">
+      <div class="form-group">
         <label><b>Dia:</b></label>
-        <input type="date" [(ngModel)]="nuevoTurno.dia" placeholder="dia" [formControl]="dia" required>
+        <input type="date" class="form-control" [(ngModel)]="nuevoTurno.dia" placeholder="dia" [formControl]="dia" required>
+      </div>
+      <div class="form-group">
         <label>Hora:</label>
-        <input type="time" [(ngModel)]="nuevoTurno.hora" placeholder="hora" [formControl]="hora" required>
+        <input type="time" class="form-control" [(ngModel)]="nuevoTurno.hora" placeholder="hora" [formControl]="hora" required>
+      </div>
         <div class="form-group">
           <label><b>Especialista:</b></label>
-          <select data-live-search="true" name="selectEspecialista" [(ngModel)]="idEspecialista" [formControl]="especialista">
+          <select data-live-search="true" class="form-control" name="selectEspecialista" [(ngModel)]="idEspecialista" [formControl]="especialista">
             <option *ngFor="let esp of especialistas" [value]="esp.id_usuario">{{esp.email}}</option>
          </select>
         </div>
         <div class="form-group" *ngIf="recepcionista">
             <label><b>Cliente:</b></label>
-            <select data-live-search="true" name="selectCliente" [(ngModel)]="cliente" [formControl]="especialista">
+            <select data-live-search="true" name="selectCliente" class="form-control" [(ngModel)]="cliente" [formControl]="especialista">
               <option *ngFor="let cli of clientes" [value]="cli.email">{{cli.email}}</option>
            </select>
           </div>
         <div class="form-group" *ngIf="recepcionista">
             <label><b>Tratamiento:</b></label>
-            <select data-live-search="true" name="selectTratamiento" [(ngModel)]="idTratamiento" [formControl]="especialista">
+            <select data-live-search="true" name="selectTratamiento" class="form-control" [(ngModel)]="idTratamiento" [formControl]="especialista">
               <option *ngFor="let trat of tratamiento" [value]="trat.id_tratamiento">{{trat.descripcion}}</option>
            </select>
         </div>
         <div>
-          <button type="submit" [disabled]="!altaTurnoForm.valid">Crear</button>
+          <button type="submit" [disabled]="!altaTurnoForm.valid" class="btn btn-primary">Crear</button>
         </div>
-      </div>
     </form>
     </div>
 

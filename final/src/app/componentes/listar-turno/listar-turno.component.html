@@ -1,5 +1,4 @@
-<app-email-sesion *ngIf="!especialista"></app-email-sesion><br>
-<app-boton-menu *ngIf="!especialista"></app-boton-menu><br>
+<app-menu *ngIf="!especialista"></app-menu>
 <table id="contentToConvert" class="table table-striped">
     <thead>
       <tr>
@@ -32,5 +31,5 @@
       </tr>
     </tbody>
   </table>
-<input type="button" value="Descargar PDF" (click)="captureScreen()"/> 
+<input type="button" class="btn btn-primary" value="Descargar PDF" (click)="captureScreen()"/> 
 <angular2csv [data]="listado" filename="CSV_FILE" [options]="options"></angular2csv>
