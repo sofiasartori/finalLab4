@@ -1,15 +1,27 @@
 del cliente falta:
 -disp de esp 
--mostrarle codigo del consultorio al pedir turno 
--filtrar sus turnos 
--sólo puede hacer la encuesta si fue atendido/conectar servicio de encuesta
--que vea la historia clinica
+-mostrarle codigo del consultorio al pedir turno (ver lo del modal)
+-filtrar sus turnos (OK) 
+-ver la tabla por que se rompe
+-sólo puede hacer la encuesta si fue atendido (OK)/conectar servicio de encuesta(OK)
+-que vea la historia clinica (OK)
 
-al dar de alta un especialista, debería poder ponerse su disponibilidad
-administrador: dar de altas a tratamientos
+al dar de alta un especialista, debería poder ponerse su disponibilidad (como bindear los valores al array)
+administrador: dar de altas a tratamientos (OK)
+dar de alta especialidades(OK)
+estadisticas
 
 del recepcionista falta:
--dar turnos por cliente y tratamiento
--conectar servicio en cancelar turno
+-dar turnos por cliente y tratamiento (OK)
+-conectar servicio en cancelar turno (OK)
 
-en el header, mostrar foto del usuario
+en el header, mostrar foto del usuario (OK)
+
+poner color al estado de los turnos (OK)
+
+estadisticas empleados (poner un select por empleado)
+cantidad de turnos por especialidad (cuando se le pueda asignar la especialidad al odontologo 
+se tiene que ver de ponerlo para pedir turno y mandarlo a la tabla de turnos)
+para todas las demas estadisticas se necesita lo de especialidad
+
+https://finallab4.000webhostapp.com/clinica/apirest.php/
