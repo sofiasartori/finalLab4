@@ -1,10 +1,10 @@
 <app-email-sesion></app-email-sesion>
 <app-boton-menu></app-boton-menu>
-<div class="card text-center" style="align-self: center; background-image: url('../../assets/background.jpg')">
+<div *ngIf="!user" class="card text-center" style="align-self: center; background-image: url('../../assets/background.jpg')">
         <div class="card-body">
           <h5 class="card-title">Clinica Buena Sonrisa</h5>
-          <button  class="btn btn-primary" routerLink="/login" routerLinkActive="active">Login</button>
-          <button class="btn btn-primary" routerLink='/contacto'>Contacto</button>
+          <button  class="btn btn-primary btn-block" routerLink="/login" routerLinkActive="active">Login</button>
+          <button class="btn btn-primary btn-block" routerLink='/contacto'>Contacto</button>
         </div>
       </div>
 
