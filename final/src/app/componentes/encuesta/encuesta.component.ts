@@ -16,7 +16,7 @@ export class EncuestaComponent implements OnInit {
   nuevaEncuesta: Encuesta;
   miEncuestaServicio: EncuestaService;
   miTurnoServicio: TurnoService;
-  turno: Turno = new Turno("", "", 0, " ", "", 0, "", 0);
+  turno: Turno = new Turno("", "", 0, " ", "", 0, "", 0, 0);
   sub: any;
 
   constructor(serviceEncuesta: EncuestaService, private builder: FormBuilder, private route: ActivatedRoute, private router: Router, turnoService: TurnoService) { 

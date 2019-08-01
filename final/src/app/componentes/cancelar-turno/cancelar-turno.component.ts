@@ -12,7 +12,7 @@ export class CancelarTurnoComponent implements OnInit {
 
   @Input() idTurno: number;
   miTurnoServicio: TurnoService;
-  turno: Turno = new Turno("", "", 0, "", "", 0, "", 0);
+  turno: Turno = new Turno("", "", 0, "", "", 0, "", 0, 0);
   constructor(serviceTurno: TurnoService, private router:Router) {
     this.miTurnoServicio=serviceTurno;
    }

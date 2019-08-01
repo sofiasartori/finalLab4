@@ -21,17 +21,11 @@ export class LoginComponent implements OnInit {
   emailLocal: string = 'email';
   tokenLocal: string = 'token';
   tipoLocal: string = 'tipo';
-<<<<<<< HEAD
-  robot: boolean=true;
-  siteKeyCaptcha: string='6LdJx64UAAAAAEP2WGkCFpZQQFHn0oYKf-TZyIJK';
-
-=======
   codigo1: number;
   codigo2: number;
   error: string;
   respuestaCaptcha: number;
   loading: any;
->>>>>>> df3bbb299270aa7a6c3901954e76ca84bb683ed0
 
   constructor(serviceUsuario: registroUsuarioService, private builder: FormBuilder, private router: Router, authoService: AuthService) {
     this.miUsuarioServicio = serviceUsuario;

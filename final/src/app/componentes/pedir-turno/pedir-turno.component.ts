@@ -47,7 +47,7 @@ export class PedirTurnoComponent implements OnInit {
     this.miTratamientoServicio = serviceTratamiento;
    }
 
-  dia = new FormControl('', [
+  dias = new FormControl('', [
     Validators.required
   ]);
   
