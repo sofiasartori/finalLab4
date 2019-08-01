@@ -1,16 +1,16 @@
 <?php
-require ('especialista.php');
+require ('especialidad.php');
 require_once ('IApiUsable.php');
 
-class especialistaApi extends Especialista implements IApiUsable
+class especialidadApi extends Especialidad implements IApiUsable
 {
     public function TraerTodos($request, $response, $args){
-        $consulta= Especialista::traerTodosUsuarios();
+        $consulta= Especialidad::traerTodos($request, $response, $args);
     }
 
     public function CargarUno($request, $response, $args){
         $arrayParametro = $request->getParsedBody();
-        $consulta = Usuario::insertarUsuario($arrayParametro);
+        $consulta = Especialidad::insertarEspecialidad($arrayParametro);
         /*$response->getBody()->write($arrayParametro);
         return $response;*/
     }
@@ -21,10 +21,15 @@ class especialistaApi extends Especialista implements IApiUsable
     }
 
     public function BuscarUno($request, $response, $args){
-    	$consulta = Especialista::buscarUsuario();
+    	$email=$args['email'];
+    	$consulta = Usuario::buscarUsuario($email);
     }
 
     public function ModificarUno($request, $response, $args){
+        $id=$args['id_consultorio'];
+        $estado=$args['estado'];
+        $atencion=$args['atencion'];
+        $consulta=Consultorio::modificarEstado($id, $estado, $atencion);
     }
 }
 ?>

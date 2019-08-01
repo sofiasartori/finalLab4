@@ -44,6 +44,7 @@ import { AltaTratamientoComponent } from './componentes/alta-tratamiento/alta-tr
 import { TratamientoService } from './servicios/tratamiento.service';
 import { AltaEspecialidadComponent } from './componentes/alta-especialidad/alta-especialidad.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
+import { EstadisticasEmpleadosComponent } from './componentes/estadisticas-empleados/estadisticas-empleados.component';
 
 
 const appRoutes: Routes = [
@@ -101,7 +102,8 @@ const appRoutes: Routes = [
     DisponibilidadComponent,
     AltaTratamientoComponent,
     AltaEspecialidadComponent,
-    ContactoComponent
+    ContactoComponent,
+    EstadisticasEmpleadosComponent
   ],
   imports: [
     BrowserModule,

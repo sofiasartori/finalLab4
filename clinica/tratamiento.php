@@ -1,15 +1,13 @@
 <?php
 require_once ('AccesoDatos.php');
-class Historia
+class Tratamiento
 {
-	public $cliente;
-	public $dentista;
-	public $comentario;
+	public $id_tratamiento;
+	public $descripcion;
 	
     public function traerTodos($request, $response, $args){
-    	$cliente=$args['cliente'];
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.historia_clinica where cliente='$cliente'");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.tratamientos");
 		$consulta->execute();
 		
 
@@ -30,13 +28,11 @@ class Historia
 		
 	}
 
-	public function insertarHistoria($request){
+	public function insertarTratamiento($request){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			var_dump($request);
-			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into clinica.historia_clinica (cliente, dentista, comentario) values (:cliente, :dentista, :comentario);");
-			$itemsUsuario->bindValue(':cliente', $request['cliente'], PDO::PARAM_STR);
-			$itemsUsuario->bindValue(':dentista', $request['dentista'], PDO::PARAM_STR);
-			$itemsUsuario->bindValue(':comentario', $request['comentario'], PDO::PARAM_STR);
+			$itemsUsuario = $objetoAccesoDato->RetornarConsulta("INSERT into clinica.tratamientos (descripcion) values (:descripcion);");
+			$itemsUsuario->bindValue(':descripcion', $request['descripcion'], PDO::PARAM_STR);
 			$itemsUsuario->execute();
 		
 	}

@@ -5,8 +5,7 @@ require_once ('IApiUsable.php');
 class turnoApi extends Turno implements IApiUsable
 {
     public function TraerTodos($request, $response, $args){
-        $dia=$args['filtro'];
-        $consulta= Turno::traerTodosTurnos($dia);
+        $consulta= Turno::traerTodosTurnos();
     }
 
     public function CargarUno($request, $response, $args){
@@ -18,10 +17,18 @@ class turnoApi extends Turno implements IApiUsable
 
     public function BorrarUno($request, $response, $args){}
     public function ModificarUno($request, $response, $args){
-        $id=$args['id'];
-        $consulta = Turno::modificarEstado($id);
+        $arrayParametro = $request->getParsedBody();
+        $consulta = Turno::modificarEstado($arrayParametro);
     }
 
-    public function BuscarUno($request, $response, $args){}    
+    public function BuscarUno($request, $response, $args){
+        $filtro=$args['filtro'];
+        $consulta = Turno::traerTurnosFecha($filtro);
+    }    
+
+    public function BuscarCliente($request, $response, $args){
+        $filtro=$args['filtro'];
+        $consulta = Turno::traerTurnosPaciente($filtro);
+    }
 }
 ?>
