@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
-import { RecaptchaModule } from 'ng-recaptcha';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,7 +46,6 @@ import { EstadisticasEmpleadosComponent } from './componentes/estadisticas-emple
 import { EstadisticasTurnosComponent } from './componentes/estadisticas-turnos/estadisticas-turnos.component';
 import { AgmCoreModule } from '@agm/core';
 import { Angular2CsvModule } from 'angular2-csv';
-import { CaptchaComponent } from './componentes/captcha/captcha.component';
 
 
 const appRoutes: Routes = [
@@ -110,8 +107,7 @@ const appRoutes: Routes = [
     AltaEspecialidadComponent,
     ContactoComponent,
     EstadisticasEmpleadosComponent,
-    EstadisticasTurnosComponent,
-    CaptchaComponent
+    EstadisticasTurnosComponent
   ],
   imports: [
     BrowserModule,
@@ -122,14 +118,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    RecaptchaModule.forRoot(),
     MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAUpIAlovUT_t0CEgThZcbEd3jHNA4OQ9s'
       }),
     Angular2CsvModule
   ],
-  providers: [AuthService, ChatService, {provide: RECAPTCHA_LANGUAGE, useValue: 'es'}, { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: []}],
+  providers: [AuthService, ChatService, { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: []}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

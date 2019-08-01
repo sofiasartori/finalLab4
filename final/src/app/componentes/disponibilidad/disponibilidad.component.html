@@ -8,12 +8,12 @@
         </select>
         <label>Dia</label>
         <select [name]="'dia'+i" [(ngModel)]="dias[i].dia_semana">
-          <option value="0">Lunes</option>
-          <option value="1">Martes</option>
-          <option value="2">Miercoles</option>
-          <option value="3">Jueves</option>
-          <option value="4">Viernes</option>
-          <option value="5">Sabado</option>
+          <option value=0>Lunes</option>
+          <option value=1>Martes</option>
+          <option value=2>Miercoles</option>
+          <option value=3>Jueves</option>
+          <option value=4>Viernes</option>
+          <option value=5>Sabado</option>
         </select>
         <label>Horario entrada</label>
         <input [name]="'entrada'+i" type="time" min="08:00" max="19:00" [(ngModel)]="dias[i].horario_llegada">

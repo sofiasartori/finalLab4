@@ -1,10 +1,35 @@
-<app-email-sesion></app-email-sesion>
-<button (click)="listadoTurnos()" *ngIf="cliente || recepcionista">Listado de turnos</button>
-<button (click)="pedirTurno()" *ngIf="cliente || recepcionista">Pedir turno</button>
-<button (click)="listadoConsultorios()" *ngIf="recepcionista">Listado de consultorios</button>
-<button (click)="listaTurnos()" *ngIf="especialista">Listado de turnos</button>
-<button (click)="historiaCliente()" *ngIf="cliente">Ver mis historias clinicas</button>
-<button (click)="insertarTratamiento()" *ngIf="admin">Insertar tratamiento</button>
-<button (click)="insertarEspecialidad()" *ngIf="admin">Insertar especialidad</button>
-<button (click)="estadisticasEmpleados()" *ngIf="admin">Estadisticas empleados</button>
-<button (click)="estadisticasTurnos()" *ngIf="admin">Estadisticas turnos</button>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Clinica Buena Sonrisa</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" (click)="listadoTurnos()" *ngIf="cliente || recepcionista">Listado de turnos <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"(click)="pedirTurno()" *ngIf="cliente || recepcionista">Pedir turno</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="listadoConsultorios()" *ngIf="recepcionista">Listado de consultorios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="listaTurnos()" *ngIf="especialista">Listado de turnos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="historiaCliente()" *ngIf="cliente">Ver mis historias clinicas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="insertarTratamiento()" *ngIf="admin">Ver mis historias clinicas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="insertarEspecialidad()" *ngIf="admin">Ver mis historias clinicas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="estadisticasEmpleados()" *ngIf="admin">Ver mis historias clinicas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="estadisticasTurnos()" *ngIf="admin">Ver mis historias clinicas</a>
+            </li>
+        </ul>
+        <div class="my-2 my-lg-0"><app-email-sesion></app-email-sesion></div>          
+        </div>
+      </nav>

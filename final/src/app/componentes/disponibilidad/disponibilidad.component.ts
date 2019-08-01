@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Disponibilidad } from 'src/app/clases/disponibilidad';
 import { EspecialidadService } from 'src/app/servicios/especialidad.service';
 import { ActivatedRoute } from '@angular/router';
+import { DiponibilidadService } from 'src/app/servicios/diponibilidad.service';
 
 @Component({
   selector: 'app-disponibilidad',
@@ -16,19 +17,21 @@ export class DisponibilidadComponent implements OnInit {
   error = '';
   id_usuario:number;
   sub: any;
-  constructor(serviceEspecialidad: EspecialidadService, private route: ActivatedRoute) {
+  miDisponibilidadServicio: DiponibilidadService;
+  constructor(serviceEspecialidad: EspecialidadService, private route: ActivatedRoute, serviceDisponibilidad: DiponibilidadService) {
     this.miEspecialidadServicio = serviceEspecialidad;
+    this.miDisponibilidadServicio = serviceDisponibilidad;
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id_usuario = params['idTurno'];
+      this.id_usuario = params['id_usuario'];
       });
     this.traerEspecialidad();
   }
   agregarDia() {
     if (this.dias.length < 6) {
-      this.dias.push({ horario_llegada: '08:00', horario_salida: '19:00' });
+      this.dias.push({ id_especialista: this.id_usuario,  horario_llegada: '08:00', horario_salida: '19:00' });
 
     }
   }
@@ -52,15 +55,15 @@ export class DisponibilidadComponent implements OnInit {
       const dia = this.dias[i];
       if (dia.horario_salida && dia.dia_semana && dia.id_especialidad && dia.horario_llegada) {
         if (dia.dia_semana == SABADO) {
-          if (dia.horario_llegada < '08:00' || dia.horario_salida > '16:00')
-            return 'El horario de atencion los días sábados es de 8 a 16hs';
+          if (dia.horario_llegada < '08:00' || dia.horario_salida > '14:00')
+            return 'El horario de atencion los días sábados es de 8 a 14hs';
         } else {
           if (dia.horario_llegada < '08:00' || dia.horario_salida > '19:00')
             return 'El horario de atencion de lunes a viernes es de 8 a 19hs';
         }
-      } else {
+      } /*else {
         return 'Faltan llenar uno o mas campos'
-      }
+      }*/
     }
   }
 
@@ -83,12 +86,17 @@ export class DisponibilidadComponent implements OnInit {
 
     return seenDuplicate;
   }
+
+  insertar(){
+    this.miDisponibilidadServicio.insertar('disponibilidad/', this.disponibilidad);
+  }
+
 }
 
 const SABADO = 5
 
 type DisponibilidadMedico = {
-  especialista?: string,
+  id_especialista?: number,
   id_especialidad?: number,
   dia_semana?: number,
   horario_llegada?: string,
