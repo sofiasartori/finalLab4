@@ -5,8 +5,8 @@ import { Turno } from '../../clases/turno';
 import { EspecialidadesService } from 'src/app/servicios/especialista.service';
 import { ConsultoriosService } from 'src/app/servicios/consultorios.service';
 import {MatDialog} from '@angular/material/dialog';
-import { DialogoTurnoComponent } from '../dialogo-turno/dialogo-turno.component';
 import { TratamientoService } from 'src/app/servicios/tratamiento.service';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-pedir-turno',
@@ -30,7 +30,7 @@ export class PedirTurnoComponent implements OnInit {
   cliente: string;
   exampleModal:any;
   
-  constructor(serviceTurno: TurnoService, private builder: FormBuilder, serviceEspecialidad: EspecialidadesService, serviceConsultorio: ConsultoriosService, private dialogo: MatDialog, serviceTratamiento: TratamientoService) {
+  constructor(serviceTurno: TurnoService, private builder: FormBuilder, serviceEspecialidad: EspecialidadesService, serviceConsultorio: ConsultoriosService, private dialogo: MatDialog, serviceTratamiento: TratamientoService, public ngxSmartModalService: NgxSmartModalService) {
     this.miTurnoServicio = serviceTurno;
     this.miEspecialista = serviceEspecialidad;
     this.miConsultorioServicio = serviceConsultorio;
@@ -80,10 +80,7 @@ export class PedirTurnoComponent implements OnInit {
     
     this.miTurnoServicio.insertar('turnos/alta/', this.nuevoTurno);
     this.cambiarEstadoConsultorio();
-    this.nuevoTurno=null;
-    //this.abrirDialogo();
-    this.exampleModal.on('shown.bs.modal', function () {
-    })
+    this.ngxSmartModalService.open('myModal');
   }
   hacerNuevoTurno()
   {
@@ -99,10 +96,6 @@ export class PedirTurnoComponent implements OnInit {
 
   cambiarEstadoConsultorio(){
     this.miConsultorioServicio.cambiarEstado(this.nuevoTurno.id_consultorio , 'p','Proximo_a_ocupar');
-  }
-
-  abrirDialogo() {
-    this.dialogo.open(DialogoTurnoComponent);
   }
 
   traerTratamientos(){

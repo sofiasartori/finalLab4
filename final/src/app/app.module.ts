@@ -33,7 +33,6 @@ import { ColorDirective } from './color.directive';
 import { FiltroTurnosComponent } from './componentes/filtro-turnos/filtro-turnos.component';
 import { FechaTurnosComponent } from './componentes/fecha-turnos/fecha-turnos.component';
 import { AtenderPacienteComponent } from './componentes/atender-paciente/atender-paciente.component';
-import { DialogoTurnoComponent } from './componentes/dialogo-turno/dialogo-turno.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { BotonEncuestaComponent } from './componentes/boton-encuesta/boton-encuesta.component';
 import { VerHistoriasComponent } from './componentes/ver-historias/ver-historias.component';
@@ -46,6 +45,7 @@ import { EstadisticasEmpleadosComponent } from './componentes/estadisticas-emple
 import { EstadisticasTurnosComponent } from './componentes/estadisticas-turnos/estadisticas-turnos.component';
 import { AgmCoreModule } from '@agm/core';
 import { Angular2CsvModule } from 'angular2-csv';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 
 const appRoutes: Routes = [
@@ -99,7 +99,6 @@ const appRoutes: Routes = [
     FiltroTurnosComponent,
     FechaTurnosComponent,
     AtenderPacienteComponent,
-    DialogoTurnoComponent,
     BotonEncuestaComponent,
     VerHistoriasComponent,
     DisponibilidadComponent,
@@ -122,7 +121,8 @@ const appRoutes: Routes = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAUpIAlovUT_t0CEgThZcbEd3jHNA4OQ9s'
       }),
-    Angular2CsvModule
+    Angular2CsvModule,
+    NgxSmartModalModule.forRoot()
   ],
   providers: [AuthService, ChatService, { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: []}],
   bootstrap: [AppComponent]
