@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
     let respuesta: string;
     let token: any;
     let tipo: string;
+    let foto: string;
     this.miUsuarioServicio.login('/login/', this.usuario).toPromise().then(response =>{
       respuesta = JSON.stringify(response);
       console.log("respuesta "+ respuesta);
@@ -66,7 +67,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem(this.tokenLocal, respuesta);
       token = jwt_decode(respuesta);
       tipo = token.data.Tipo;
+      foto=token.data.Foto;
       localStorage.setItem(this.tipoLocal, tipo);
+      localStorage.setItem('foto', foto);
       this.router.navigate(['/menu']);
       
       },

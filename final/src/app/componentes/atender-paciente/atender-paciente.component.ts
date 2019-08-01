@@ -11,7 +11,7 @@ import { Turno } from 'src/app/clases/turno';
 export class AtenderPacienteComponent implements OnInit {
   @Input() idTurno: number; 
   @Input() paciente: string;
-  turno: Turno;
+  turno: Turno = new Turno("", "", 0, "", "", 0, "", 0);
   miTurnoServicio: TurnoService;
   constructor(serviceTurno: TurnoService, private router:Router) {
     this.miTurnoServicio=serviceTurno;

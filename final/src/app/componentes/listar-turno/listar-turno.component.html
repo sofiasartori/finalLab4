@@ -7,6 +7,7 @@
         <th>Hora</th>
         <th *ngIf="recepcionista || especialista">Cliente</th>
         <th *ngIf="recepcionista || especialista">Recepcionista</th>
+        <th *ngIf="!especialista">Especialista</th>
         <th>Consultorio</th>
         <th>Estado</th>
         <th *ngIf="recepcionista || especialista">Tratamiento</th>
@@ -21,10 +22,11 @@
         <td>{{turno.hora}} </td>
         <td *ngIf="recepcionista || especialista">{{turno.cliente}} </td>
         <td *ngIf="recepcionista || especialista">{{turno.recepcionista}} </td>
+        <td *ngIf="!especialista">{{turno.id_especialista}}</td>
         <td>{{turno.id_consultorio}}</td>
-        <td>{{turno.estado}}</td>
+        <td [appColor]="turno.estado">{{turno.estado}}</td>
         <td *ngIf="recepcionista || especialista">{{turno.id_tratamiento}} </td>
-        <td *ngIf="recepcionista"><app-cancelar-turno></app-cancelar-turno></td>
+        <td *ngIf="recepcionista && turno.estado=='asignado'"><app-cancelar-turno [idTurno]="turno.id_turno"></app-cancelar-turno></td>
         <td *ngIf="especialista && turno.estado=='asignado'"><app-atender-paciente [paciente]="turno.cliente" [idTurno]="turno.id_turno"></app-atender-paciente></td>
         <td *ngIf="(!recepcionista && !especialista) && turno.estado=='atendido'"><app-boton-encuesta [idTurno]="turno.id_turno"></app-boton-encuesta></td>
       </tr>

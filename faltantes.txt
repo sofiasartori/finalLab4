@@ -6,12 +6,15 @@ del cliente falta:
 -sólo puede hacer la encuesta si fue atendido (OK)/conectar servicio de encuesta(OK)
 -que vea la historia clinica (OK)
 
-al dar de alta un especialista, debería poder ponerse su disponibilidad
+al dar de alta un especialista, debería poder ponerse su disponibilidad (como bindear los valores al array)
 administrador: dar de altas a tratamientos (OK)
 dar de alta especialidades(OK)
+estadisticas
 
 del recepcionista falta:
--dar turnos por cliente y tratamiento
--conectar servicio en cancelar turno
+-dar turnos por cliente y tratamiento (OK)
+-conectar servicio en cancelar turno (OK)
 
-en el header, mostrar foto del usuario
+en el header, mostrar foto del usuario (OK)
+
+poner color al estado de los turnos (OK)

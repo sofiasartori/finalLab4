@@ -20,6 +20,18 @@
             <option *ngFor="let esp of especialistas" [value]="esp.id_usuario">{{esp.email}}</option>
          </select>
         </div>
+        <div class="form-group" *ngIf="recepcionista">
+            <label><b>Cliente:</b></label>
+            <select data-live-search="true" name="selectCliente" [(ngModel)]="cliente" [formControl]="especialista">
+              <option *ngFor="let cli of clientes" [value]="cli.email">{{cli.email}}</option>
+           </select>
+          </div>
+        <div class="form-group" *ngIf="recepcionista">
+            <label><b>Tratamiento:</b></label>
+            <select data-live-search="true" name="selectTratamiento" [(ngModel)]="idTratamiento" [formControl]="especialista">
+              <option *ngFor="let trat of tratamiento" [value]="trat.id_tratamiento">{{trat.descripcion}}</option>
+           </select>
+        </div>
         <div>
           <button type="submit" [disabled]="!altaTurnoForm.valid">Crear</button>
         </div>

@@ -43,6 +43,7 @@ import { DisponibilidadComponent } from './componentes/disponibilidad/disponibil
 import { AltaTratamientoComponent } from './componentes/alta-tratamiento/alta-tratamiento.component';
 import { TratamientoService } from './servicios/tratamiento.service';
 import { AltaEspecialidadComponent } from './componentes/alta-especialidad/alta-especialidad.component';
+import { ContactoComponent } from './componentes/contacto/contacto.component';
 
 
 const appRoutes: Routes = [
@@ -65,7 +66,8 @@ const appRoutes: Routes = [
   { path: 'historiaCliente',  component: VerHistoriasComponent, canActivate:[AuthGuard]},
   { path: 'disponibilidad',  component: DisponibilidadComponent, canActivate:[AuthGuard]},
   { path: 'tratamiento',  component: AltaTratamientoComponent, canActivate:[AuthGuard]},
-  { path: 'especialidad',  component: AltaEspecialidadComponent, canActivate:[AuthGuard]}
+  { path: 'especialidad',  component: AltaEspecialidadComponent, canActivate:[AuthGuard]},
+  { path: 'contacto',  component: ContactoComponent}
   //{ path: '**', component: ErrorComponent }
 ];
 
@@ -98,7 +100,8 @@ const appRoutes: Routes = [
     VerHistoriasComponent,
     DisponibilidadComponent,
     AltaTratamientoComponent,
-    AltaEspecialidadComponent
+    AltaEspecialidadComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ export class EspecialidadesService {
   filtrado: any;
 
   traertodos(ruta: string, filtro: string) {
-    return this.miHttp.traerUsuarios('especialistas/').then(data => {
+    return this.miHttp.traerUsuarios(ruta).then(data => {
       console.log('usuarios service', data);
       return data;
     });

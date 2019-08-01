@@ -1,20 +1,28 @@
 <div>
-  <form [formGroup]="dispForm" class="modal-content animate" (ngSubmit)="subirDisponibilidad()" >
     <div class="container">
-      <label><b>Especialidad:</b></label>
-      <input type="text" [(ngModel)]="disponibilidad.especialidad" placeholder="email" [formControl]="email" required>
-      <label>Dia de la semana:</label>
-        <input [(ngModel)]="disponibilidad.dia_semana.lunes" type="checkbox" value="1">Lunes
-        <input [(ngModel)]="disponibilidad.dia_semana.martes" type="checkbox" value="2">Martes
-        <input [(ngModel)]="disponibilidad.dia_semana.miercoles" type="checkbox" value="3">Miercoles
-        <input [(ngModel)]="disponibilidad.dia_semana.jueves" type="checkbox" value="4">Jueves
-        <input [(ngModel)]="disponibilidad.dia_semana.viernes" type="checkbox" value="5">Viernes
-        <input [(ngModel)]="disponibilidad.dia_semana.sabado" type="checkbox" value="6">Sabado
-      <input type="time" max="19:00">
-      <div>
-        <button type="submit" [disabled]="!dispForm.valid">Crear</button>
+      <form submit="agregarDia()" (ngSubmit)="altaDisponibilidad()">
+      <div *ngFor="let a of dias ; let i = index">
+        <label>Especialidad</label>
+        <select name="especialidad" [(ngModel)]="idEspecialidad">
+          <option *ngFor="let esp of especialidad"[value]="esp.id_especialidad">{{esp.descripcion}}</option>
+        </select>
+        <label>Dia</label>
+        <select name="dia">
+          <option value="0">Lunes</option>
+          <option value="1">Martes</option>
+          <option value="2">Miercoles</option>
+          <option value="3">Jueves</option>
+          <option value="4">Viernes</option>
+          <option value="5">Sabado</option>
+        </select>
+        <label>Horario entrada</label>
+        <input name="entrada" type="time" min="08:00" max="19:00">
+        <label>Horario salida</label>
+        <input name="salida" type="time" max="19:00">
+        <button (click)="agregarDia()">+</button>
       </div>
+      <button type="submit">Terminar</button>
+    </form>
     </div>
-  </form>
   </div>
 
