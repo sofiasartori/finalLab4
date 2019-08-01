@@ -25,6 +25,7 @@ export class EmailSesionComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('tipo');
     localStorage.removeItem('foto');
+    localStorage.removeItem('ID');
     this.autServicio.logOut();
     this.router.navigate(['/login']);
     //this.ngOnInit();

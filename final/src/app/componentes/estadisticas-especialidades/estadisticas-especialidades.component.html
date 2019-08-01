@@ -1,0 +1,31 @@
+<app-menu></app-menu>
+<body style="background-image: url('../assets/background.jpg')"><br>
+  <div class="text-center">
+      <div class="btn-group">
+          <button class="btn btn-primary" (click)="mas()">La más usada</button>
+          <button  class="btn btn-primary" (click)="menos()">La menos usada</button>
+          <button class="btn btn-primary" (click)="mejor()">Mejores comentarios</button>
+          <button class="btn btn-primary" (click)="peor()">Peores comentarios</button>
+        </div>
+  </div> 
+
+  <div *ngIf='mass'>
+      <h2>La especialidad mas usada fue: {{especialidadmas}}</h2>
+  </div>
+  <div *ngIf='menoss'>
+      <h2>La especialidad menos usada fue: {{especialidadmenos}}</h2>
+  </div>
+  <div *ngIf='mejorr'>
+      <h2>La mejor encuesta fue: </h2>
+      <label>Puntuación general: {{encuesta[0].suma}}</label><br>
+      <label>Opinion: {{encuesta[0].opinion}}</label><br>
+      <label>Especialidad: {{encuesta[0].descripcion}}</label><br>
+      <label>Especialista: {{encuesta[0].email}}</label><br>
+  </div>
+  <div *ngIf='peorr'>
+      <h2>La peor encuesta fue: </h2>
+      <label>Puntuación general: {{peorEncuesta[0].suma}}</label><br>
+      <label>Opinion: {{peorEncuesta[0].opinion}}</label><br>
+      <label>Especialidad: {{peorEncuesta[0].descripcion}}</label><br>
+      <label>Especialista: {{peorEncuesta[0].email}}</label><br>
+  </div>

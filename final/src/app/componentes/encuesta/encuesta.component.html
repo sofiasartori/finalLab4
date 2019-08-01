@@ -1,21 +1,26 @@
 <!--<div *ngIf="idTurno">
   <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevaEncuesta()">Tomar encuesta</button>
 </div>-->
-
-<div *ngIf="idTurno">
-  <form [formGroup]="encuestaForm" class="modal-content animate" (ngSubmit)="completar()" >
-    <div class="container">
+<body style="background-image: url('../assets/background.jpg')">
+<div class="text-center" *ngIf="idTurno">
+  <form [formGroup]="encuestaForm" class="" (ngSubmit)="completar()" >
+    <div class="form-group">
       <label><b>Puntuación de la clínica:</b></label>
       <input type="range" min="1" max="10" [(ngModel)]="nuevaEncuesta.clinica" [formControl]="clinica" required>
+    </div>
+    <div class="form-group">
       <label><b>Puntuación del especialista:</b></label>
       <input type="range" min="1" max="10" [(ngModel)]="nuevaEncuesta.especialista" [formControl]="especialista" required>
+    </div>
+    
       <label><b>Comentarios:</b></label>
-      <div class="row align-items-center">
+      <div class="text-center">
         <textarea maxlength="66"[(ngModel)]="nuevaEncuesta.opinion" [formControl]="comentarios" required></textarea>
       </div>
-      <div>
-        <button type="submit" [disabled]="!encuestaForm.valid">Completar encuesta</button>
+    
+      <div class="form-group">
+        <button class="form-control" type="submit" class="btn btn-primary" [disabled]="!encuestaForm.valid">Completar encuesta</button>
       </div>
-    </div>
   </form>
   </div>
+</body>

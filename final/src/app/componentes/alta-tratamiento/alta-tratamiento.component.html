@@ -1,3 +1,10 @@
-<label><b>Descripcion del tratamiento</b></label>
-<input type="text" [(ngModel)]="descripcion" required>
-<button type="submit" (click)="crearTratamiento()">Crear tratamiento</button>
+<app-menu></app-menu>
+<body style="background-image: url('../assets/background.jpg')">
+<form class="text-center">
+        <div class="form-group">
+            <label><b>Descripcion del tratamiento</b></label>
+            <input type="text" class="form-control" name="descripcion" [(ngModel)]="descripcion" required>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="crearTratamiento()">Crear tratamiento</button>
+</form>
+</body>

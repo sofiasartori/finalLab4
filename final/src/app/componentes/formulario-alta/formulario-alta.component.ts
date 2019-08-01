@@ -53,12 +53,20 @@ export class FormularioAltaComponent implements OnInit {
     this.SeCreoUnUsuario.emit(this.nuevoUsuario);
     
     this.miUsuarioServicio.insertar('usuario/alta', this.nuevoUsuario);
+    setTimeout(() => {
+      if(this.nuevoUsuario.tipo==="especialista"){
+        this.miUsuarioServicio.obtenerId('usuarios/id/', this.nuevoUsuario.email).then((data:any)=>{
+          this.nuevoUsuario=null;
+          if(data && data.length >0)
+          this.router.navigate(['/disponibilidad', data[0].id_usuario]);
+        });        
+      }else{
+        this.nuevoUsuario=null;
+      }
+    }, 3000);
     
-    if(this.nuevoUsuario.tipo==="especialista"){
-      this.nuevoUsuario=null;
-      this.router.navigate(['/disponibilidad']);
-    }
-    this.nuevoUsuario=null;
+    //this.nuevoUsuario=null;
+    
   }
   hacerNuevoUsuario()
   {

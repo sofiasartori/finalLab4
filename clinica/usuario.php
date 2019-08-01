@@ -11,18 +11,12 @@ class Usuario
 	
     public function traerTodosUsuarios(){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+<<<<<<< HEAD
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM id9856454_clinica.usuarios");
+=======
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.log_usuarios");
+>>>>>>> df3bbb299270aa7a6c3901954e76ca84bb683ed0
 		$consulta->execute();
-		
-
-		/*$tabla ='<table style="border:1px solid black;"><tr><th>Sabor</th><th>Tipo</th><th>Kilos</th></tr>';
-		while($i=$consulta->fetch()){
-			$tabla = $tabla.'<tr><td>'.$i['sabor'].'</td>
-					   <td>'.$i['tipo'].'</td>
-					   <td>'.$i['kilos'].'</td></tr>';
-		}
-		$tabla =$tabla.'</table>';
-		echo $tabla;*/
 		$miArray = Array();
 		while($i=$consulta->fetch()){
 			array_push($miArray, $i);		
@@ -60,7 +54,22 @@ class Usuario
 
 	public function logConexion($email){
 		$objetoAccesoDato= AccesoDatos::dameUnObjetoAcceso();
+<<<<<<< HEAD
 		$consulta=$objetoAccesoDato->RetornarConsulta("UPDATE id9856454_clinica.usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP() WHERE email='$email';");
+=======
+		$consulta=$objetoAccesoDato->RetornarConsulta("INSERT into clinica.log_usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP(), usuario='$email';");
 		$consulta->execute();
+	}
+
+	public function traerId($email, $request, $args){
+		$objetoAccesoDato= AccesoDatos::dameUnObjetoAcceso();
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT id_usuario FROM clinica.usuarios WHERE email='$email';");
+>>>>>>> df3bbb299270aa7a6c3901954e76ca84bb683ed0
+		$consulta->execute();
+		$miArray=Array();
+		while($i=$consulta->fetch()){
+			array_push($miArray, $i);		
+		}
+		echo json_encode($miArray);
 	}
 }

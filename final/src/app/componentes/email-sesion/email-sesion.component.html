@@ -1,6 +1,10 @@
-<img style="display: inline-block;
+<nav *ngIf="email" class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" *ngIf="!email">Clinica Buena Sonrisa</a>
+        <img *ngIf="email" style="display: inline-block;
 width: 50px;
 height: 50px;
 border-radius: 50%;" [src]="getSantizeUrl()"  >
-<label>{{email}}</label>
-<button *ngIf="email" (click)="logout()">Cerrar Sesión</button><br>
+        <label>{{email}}</label>
+        <button *ngIf="email" class="btn btn-danger" (click)="logout()">Cerrar Sesión</button><br>
+        
+      </nav>

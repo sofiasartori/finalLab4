@@ -1,41 +1,102 @@
-<app-email-sesion></app-email-sesion><br>
-<app-boton-menu></app-boton-menu><br>
-<div *ngIf="!nuevoTurno">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<app-menu></app-menu>
+<body style="background-image: url('../assets/background.jpg')">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<div class="text-center" *ngIf="!nuevoTurno">
 
 
-    <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevoTurno()">Nuevo Turno</button>
+    <button class="btn btn-lg btn-warning"  (click)="hacerNuevoTurno()">Nuevo Turno</button>
   
   
   </div>
-  <div *ngIf="nuevoTurno">
-    <form [formGroup]="altaTurnoForm" class="modal-content animate" (ngSubmit)="crearTurno()" >
-      <div class="container">
-        <label><b>Dia:</b></label>
-        <input type="date" [(ngModel)]="nuevoTurno.dia" placeholder="dia" [formControl]="dia" required>
-        <label>Hora:</label>
-        <input type="time" [(ngModel)]="nuevoTurno.hora" placeholder="hora" [formControl]="hora" required>
-        <div class="form-group">
-          <label><b>Especialista:</b></label>
-          <select data-live-search="true" name="selectEspecialista" [(ngModel)]="idEspecialista" [formControl]="especialista">
-            <option *ngFor="let esp of especialistas" [value]="esp.id_usuario">{{esp.email}}</option>
-         </select>
-        </div>
-        <div class="form-group" *ngIf="recepcionista">
-            <label><b>Cliente:</b></label>
-            <select data-live-search="true" name="selectCliente" [(ngModel)]="cliente" [formControl]="especialista">
-              <option *ngFor="let cli of clientes" [value]="cli.email">{{cli.email}}</option>
-           </select>
-          </div>
-        <div class="form-group" *ngIf="recepcionista">
-            <label><b>Tratamiento:</b></label>
-            <select data-live-search="true" name="selectTratamiento" [(ngModel)]="idTratamiento" [formControl]="especialista">
-              <option *ngFor="let trat of tratamiento" [value]="trat.id_tratamiento">{{trat.descripcion}}</option>
-           </select>
-        </div>
-        <div>
-          <button type="submit" [disabled]="!altaTurnoForm.valid">Crear</button>
-        </div>
-      </div>
-    </form>
+  <div *ngIf="nuevoTurno" class="text-center">
+
+    <div *ngFor="let turno of turnosVacios">
+      <button (click)="hacerNuevoTurno(turno)">Seleccionar</button>
     </div>
 
+     <form [formGroup]="altaTurnoForm" class="" (ngSubmit)="buscarDisponibilidad()" >
+      <!--  <div class="form-group">
+        <label><b>Dia:</b></label>
+        <input type="date" class="form-control" [(ngModel)]="dia" placeholder="dia" [formControl]="dia" required>
+      </div>
+     <div class="form-group">
+        <label>Hora:</label>
+        <input type="time" class="form-control" [(ngModel)]="nuevoTurno.hora" placeholder="hora" [formControl]="hora" required>
+      </div> 
+        <div class="form-group">
+          <label><b>Especialidad:</b></label>
+          <select data-live-search="true" class="form-control" name="selectEspecialista" [(ngModel)]="especialidad" [formControl]="especialista">
+            <option *ngFor="let esp of especialidades" [value]="esp.id_especialidad ">{{esp.descripcion}}</option>
+         </select>
+        </div>-->
+
+        <div class="form-group">
+            <label><b>Especialista:</b></label>
+            <select data-live-search="true" class="form-control" name="selectEspecialista" [(ngModel)]="idEspecialista" [formControl]="especialista">
+              <option *ngFor="let esp of especialistas" [value]="esp.id_usuario">{{esp.email}}</option>
+           </select>
+          </div>
+
+<!-- 
+        <div class="form-group">
+            <label><b>Especialista:</b></label>
+            <select data-live-search="true" class="form-control" name="selectEspecialista" [(ngModel)]="idEspecialista" [formControl]="especialista">
+              <option *ngFor="let esp of especialistas" [value]="esp.id_usuario">{{esp.email}}</option>
+           </select>
+          </div> -->
+        <!-- <div class="form-group" *ngIf="recepcionista">
+            <label><b>Cliente:</b></label>
+            <select data-live-search="true" name="selectCliente" class="form-control" [(ngModel)]="cliente" [formControl]="especialista">
+              <option *ngFor="let cli of clientes" [value]="cli.email">{{cli.email}}</option>
+           </select>
+          </div> -->
+        <!-- <div class="form-group" *ngIf="recepcionista">
+            <label><b>Tratamiento:</b></label>
+            <select data-live-search="true" name="selectTratamiento" class="form-control" [(ngModel)]="idTratamiento" [formControl]="especialista">
+              <option *ngFor="let trat of tratamiento" [value]="trat.id_tratamiento">{{trat.descripcion}}</option>
+           </select>
+        </div> -->
+        <div>
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form> 
+
+    <table *ngIf="okTurnos" class="table table-striped">
+        <thead>
+            <tr>
+              <th>Dia</th>
+              <th>Hora</th>
+              <th>Especialidad</th>
+              <th>Pedir Turno</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let turno of listado" >
+              <td>{{turno.dia_semana}} </td>
+              <td>{{turno.horario_llegada}} </td>
+              <td>{{turno.especialidad}}</td>
+              <td><button (click)="crearTurno(turno.id_especialidad)"  class="btn btn-primary">Pedir turno</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+    <!-- <button type="submit" [disabled]="!altaTurnoForm.valid" class="btn btn-primary">Buscar</button> -->
+
+
+    </div>
+
+    <ngx-smart-modal #myModal identifier="myModal" (onClose)="nuevoTurno=null">
+        
+        
+        <img src="../../../assets/turno.png" style="display: inline-block;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;">
+        Tu turno ha sido asignado. Te atenderán en el consultorio: <b>{{ nuevoTurno?.id_consultorio }}</b>
+      </ngx-smart-modal>
+
+</body>

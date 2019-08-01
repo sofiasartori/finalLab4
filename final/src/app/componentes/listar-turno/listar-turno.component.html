@@ -1,6 +1,6 @@
-<app-email-sesion *ngIf="!especialista"></app-email-sesion><br>
-<app-boton-menu *ngIf="!especialista"></app-boton-menu><br>
-<table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+<app-menu *ngIf="!especialista"></app-menu>
+<body style="background-image: url('../assets/background.jpg')">
+<table id="contentToConvert" class="table table-striped">
     <thead>
       <tr>
         <th>Dia</th>
@@ -32,3 +32,6 @@
       </tr>
     </tbody>
   </table>
+<input type="button" class="btn btn-primary" value="Descargar PDF" (click)="captureScreen()"/> 
+<angular2csv [data]="listado" filename="CSV_FILE" [options]="options"></angular2csv>
+</body>

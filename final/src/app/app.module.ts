@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
-import { RecaptchaModule } from 'ng-recaptcha';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +33,6 @@ import { ColorDirective } from './color.directive';
 import { FiltroTurnosComponent } from './componentes/filtro-turnos/filtro-turnos.component';
 import { FechaTurnosComponent } from './componentes/fecha-turnos/fecha-turnos.component';
 import { AtenderPacienteComponent } from './componentes/atender-paciente/atender-paciente.component';
-import { DialogoTurnoComponent } from './componentes/dialogo-turno/dialogo-turno.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { BotonEncuestaComponent } from './componentes/boton-encuesta/boton-encuesta.component';
 import { VerHistoriasComponent } from './componentes/ver-historias/ver-historias.component';
@@ -46,6 +43,10 @@ import { AltaEspecialidadComponent } from './componentes/alta-especialidad/alta-
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { EstadisticasEmpleadosComponent } from './componentes/estadisticas-empleados/estadisticas-empleados.component';
 import { EstadisticasTurnosComponent } from './componentes/estadisticas-turnos/estadisticas-turnos.component';
+import { AgmCoreModule } from '@agm/core';
+import { Angular2CsvModule } from 'angular2-csv';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { EstadisticasEspecialidadesComponent } from './componentes/estadisticas-especialidades/estadisticas-especialidades.component';
 
 
 const appRoutes: Routes = [
@@ -66,11 +67,12 @@ const appRoutes: Routes = [
   { path: 'historiaClinica',  component: FormularioHistoriaComponent, canActivate:[AuthGuard]},
   { path: 'encuesta/:idTurno',  component: EncuestaComponent, canActivate:[AuthGuard]},
   { path: 'historiaCliente',  component: VerHistoriasComponent, canActivate:[AuthGuard]},
-  { path: 'disponibilidad',  component: DisponibilidadComponent, canActivate:[AuthGuard]},
+  { path: 'disponibilidad/:id_usuario',  component: DisponibilidadComponent, canActivate:[AuthGuard]},
   { path: 'tratamiento',  component: AltaTratamientoComponent, canActivate:[AuthGuard]},
   { path: 'especialidad',  component: AltaEspecialidadComponent, canActivate:[AuthGuard]},
   { path: 'estadisticasEmpleados',  component: EstadisticasEmpleadosComponent, canActivate:[AuthGuard]},
   { path: 'estadisticasTurnos',  component: EstadisticasTurnosComponent, canActivate:[AuthGuard]},
+  { path: 'estadisticasEspecialidades',  component: EstadisticasEspecialidadesComponent, canActivate:[AuthGuard]},
   { path: 'contacto',  component: ContactoComponent}
   //{ path: '**', component: ErrorComponent }
 ];
@@ -99,7 +101,6 @@ const appRoutes: Routes = [
     FiltroTurnosComponent,
     FechaTurnosComponent,
     AtenderPacienteComponent,
-    DialogoTurnoComponent,
     BotonEncuestaComponent,
     VerHistoriasComponent,
     DisponibilidadComponent,
@@ -107,7 +108,8 @@ const appRoutes: Routes = [
     AltaEspecialidadComponent,
     ContactoComponent,
     EstadisticasEmpleadosComponent,
-    EstadisticasTurnosComponent
+    EstadisticasTurnosComponent,
+    EstadisticasEspecialidadesComponent
   ],
   imports: [
     BrowserModule,
@@ -118,10 +120,14 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    RecaptchaModule.forRoot(),
-    MatDialogModule
+    MatDialogModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAUpIAlovUT_t0CEgThZcbEd3jHNA4OQ9s'
+      }),
+    Angular2CsvModule,
+    NgxSmartModalModule.forRoot()
   ],
-  providers: [AuthService, ChatService, {provide: RECAPTCHA_LANGUAGE, useValue: 'es'}, { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: []}],
+  providers: [AuthService, ChatService, { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: []}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HighlightDelayBarrier } from 'blocking-proxy/built/lib/highlight_delay_barrier';
 
 @Component({
   selector: 'app-menu',
@@ -26,7 +25,7 @@ export class MenuComponent implements OnInit {
     }
     else if(localStorage.getItem("tipo")==="recepcionista")
       this.recepcionista="recepcionista";
-    else
+    else if(localStorage.getItem("email")==="admin")
       this.admin='ok';
   }
 
@@ -68,5 +67,17 @@ export class MenuComponent implements OnInit {
 
   estadisticasTurnos(){
     this.router.navigate(['/estadisticasTurnos']);
+  }
+
+  estadisticasEspecialidades(){
+    this.router.navigate(['/estadisticasEspecialidades']);
+  }
+
+  abrirForm(){
+    this.router.navigate(['/formulario-usuario']);
+  }
+
+  contacto(){
+    this.router.navigate(['/contacto']);
   }
 }

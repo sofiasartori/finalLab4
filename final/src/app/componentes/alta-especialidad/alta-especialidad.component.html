@@ -1,3 +1,10 @@
-<label><b>Descripcion de la especialidad</b></label>
-<input type="text" [(ngModel)]="descripcion" required>
-<button type="submit" (click)="crearEspecialidad()">Crear especialidad</button>
+<app-menu></app-menu>
+<body style="background-image: url('../assets/background.jpg')">
+<form class="text-center">
+    <div class="form-group">
+        <label><b>Descripcion de la especialidad</b></label>
+        <input class="form-control" name="descripcion" type="text" [(ngModel)]="descripcion" required>
+        <button class="btn btn-primary" type="submit" (click)="crearEspecialidad()">Crear especialidad</button>
+    </div>
+</form>
+</body>

@@ -31,10 +31,7 @@ export class registroUsuarioService {
    return this.miHttp.login('login/', desc);
  }
 
- enviarCaptcha(response){
-  let data = {
-    'g-recaptcha-response': response
-  };
-  return this.miHttp.httpPostPSinSubscripcion("captcha/", data);
+obtenerId(ruta:string, email:string){
+  return this.miHttp.obtenerId('usuarios/id/', email);
 }
 }

@@ -72,4 +72,50 @@ class Especialidad
 		$consulta=$objetoAccesoDato->RetornarConsulta("UPDATE clinica.usuarios SET ult_conexion_dia = NOW(), ult_conexion_hora=CURRENT_TIMESTAMP() WHERE email='$email';");
 		$consulta->execute();
 	}
+
+	public function masUsada(){
+		$objetoAccesoDato= AccesoDatos::dameUnObjetoAcceso();
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT e.descripcion as 'mas', COUNT(t.id_especialidad) from clinica.especialidad as e JOIN clinica.turnos as t ON(t.id_especialidad= e.id_especialidad) GROUP BY t.id_especialidad ORDER BY COUNT(t.id_especialidad) DESC");
+		$consulta->execute();
+		$miArray = Array();
+		while($i=$consulta->fetch()){
+			array_push($miArray, $i);		
+		}
+		echo json_encode($miArray);
+	}
+
+	public function menosUsada($request, $response, $args){
+		$objetoAccesoDato= AccesoDatos::dameUnObjetoAcceso();
+		$consulta=$objetoAccesoDato->RetornarConsulta("SELECT e.descripcion as 'mas', COUNT(t.id_especialidad) from clinica.especialidad as e JOIN clinica.turnos as t ON(t.id_especialidad= e.id_especialidad) GROUP BY t.id_especialidad ORDER BY COUNT(t.id_especialidad) ASC");
+		$consulta->execute();
+		$miArray = Array();
+		while($i=$consulta->fetch()){
+			array_push($miArray, $i);		
+		}
+		echo json_encode($miArray);
+	}
+
+	public function mejorComentario(){
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT sum(en.especialista+ en.clinica) as 'suma', en.opinion, e.descripcion, u.email from clinica.encuestas as en JOIN
+			clinica.turnos as t ON (en.id_turno=t.id_turno) JOIN clinica.especialidad as e on (t.id_especialidad=e.id_especialidad) JOIN clinica.usuarios as u ON (t.id_especialista=u.id_usuario) group by en.id_turno ORDER by SUM(en.especialista+ en.clinica) DESC limit 1;");
+		$consulta->execute();
+		$miArray = Array();
+		while($i=$consulta->fetch()){
+			array_push($miArray, $i);		
+		}
+		echo json_encode($miArray);
+	}
+
+	public function peorComentario(){
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT sum(en.especialista+ en.clinica) as 'suma', en.opinion, e.descripcion, u.email from clinica.encuestas as en JOIN
+			clinica.turnos as t ON (en.id_turno=t.id_turno) JOIN clinica.especialidad as e on (t.id_especialidad=e.id_especialidad) JOIN clinica.usuarios as u ON (t.id_especialista=u.id_usuario) group by en.id_turno ORDER by SUM(en.especialista+ en.clinica) ASC limit 1;");
+		$consulta->execute();
+		$miArray = Array();
+		while($i=$consulta->fetch()){
+			array_push($miArray, $i);		
+		}
+		echo json_encode($miArray);
+	}
 }

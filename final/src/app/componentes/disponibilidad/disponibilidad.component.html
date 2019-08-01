@@ -1,28 +1,37 @@
-<div>
-    <div class="container">
-      <form submit="agregarDia()" (ngSubmit)="altaDisponibilidad()">
+<body style="background-image: url('../assets/background.jpg')">
+  <div *ngIf="!nuevaDisponibilidad">
+
+
+      <button class="btn btn-lg btn-warning"  (click)="hacerNuevaDisponibilidad()">Agregar disponibilidad</button>
+    
+    
+    </div>
+<div *ngIf="nuevaDisponibilidad">
+  <div class="container">
+    <form submit="agregarDia()" (ngSubmit)="guardarMisHorarios()">
       <div *ngFor="let a of dias ; let i = index">
         <label>Especialidad</label>
-        <select name="especialidad" [(ngModel)]="idEspecialidad">
-          <option *ngFor="let esp of especialidad"[value]="esp.id_especialidad">{{esp.descripcion}}</option>
+        <select [name]="'especialidad'+i" [(ngModel)]="dias[i].id_especialidad">
+          <option *ngFor="let esp of especialidad" [value]="esp.id_especialidad ">{{esp.descripcion}}</option>
         </select>
         <label>Dia</label>
-        <select name="dia">
-          <option value="0">Lunes</option>
-          <option value="1">Martes</option>
-          <option value="2">Miercoles</option>
-          <option value="3">Jueves</option>
-          <option value="4">Viernes</option>
-          <option value="5">Sabado</option>
+        <select [name]="'dia'+i" [(ngModel)]="dias[i].dia_semana">
+          <option value=0>Lunes</option>
+          <option value=1>Martes</option>
+          <option value=2>Miercoles</option>
+          <option value=3>Jueves</option>
+          <option value=4>Viernes</option>
+          <option value=5>Sabado</option>
         </select>
         <label>Horario entrada</label>
-        <input name="entrada" type="time" min="08:00" max="19:00">
+        <input [name]="'entrada'+i" type="time" min="08:00" max="19:00" [(ngModel)]="dias[i].horario_llegada">
         <label>Horario salida</label>
-        <input name="salida" type="time" max="19:00">
+        <input [name]="'salida'+i" type="time" max="19:00" [(ngModel)]="dias[i].horario_salida">
         <button (click)="agregarDia()">+</button>
       </div>
-      <button type="submit">Terminar</button>
+      <button type="submit" class="btn btn-primary">Terminar</button>
     </form>
-    </div>
   </div>
-
+  <div class='error'>{{error}}</div>
+</div>
+</body>

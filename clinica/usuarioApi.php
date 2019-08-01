@@ -27,5 +27,10 @@ class usuarioApi extends Usuario implements IApiUsable
 
     public function ModificarUno($request, $response, $args){
     }
+
+    public function TraerId($request, $response, $args){
+        $email=$args['email'];
+        $consulta = Usuario::traerId($email, $response, $args);
+    }
 }
 ?>
