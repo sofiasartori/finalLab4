@@ -46,6 +46,8 @@ import { AltaEspecialidadComponent } from './componentes/alta-especialidad/alta-
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { EstadisticasEmpleadosComponent } from './componentes/estadisticas-empleados/estadisticas-empleados.component';
 import { EstadisticasTurnosComponent } from './componentes/estadisticas-turnos/estadisticas-turnos.component';
+import { AgmCoreModule } from '@agm/core';
+import { Angular2CsvModule } from 'angular2-csv';
 
 
 const appRoutes: Routes = [
@@ -119,7 +121,11 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     RecaptchaModule.forRoot(),
-    MatDialogModule
+    MatDialogModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAUpIAlovUT_t0CEgThZcbEd3jHNA4OQ9s'
+      }),
+    Angular2CsvModule
   ],
   providers: [AuthService, ChatService, {provide: RECAPTCHA_LANGUAGE, useValue: 'es'}, { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: []}],
   bootstrap: [AppComponent]

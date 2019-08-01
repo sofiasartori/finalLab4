@@ -3,7 +3,7 @@
       <form submit="agregarDia()" (ngSubmit)="altaDisponibilidad()">
       <div *ngFor="let a of dias ; let i = index">
         <label>Especialidad</label>
-        <select name="especialidad" [(ngModel)]="idEspecialidad">
+        <select name="especialidad" [(ngModel)]="dias[i].idEspecialidad">
           <option *ngFor="let esp of especialidad"[value]="esp.id_especialidad">{{esp.descripcion}}</option>
         </select>
         <label>Dia</label>
