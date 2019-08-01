@@ -3,7 +3,7 @@
   <div class="text-center">
       <div  class="btn-group">
           <button class="btn btn-primary" (click)="conexiones()">Mostrar Conexiones</button>
-          <button class="btn btn-primary">Mostrar Turnos</button>
+          <button class="btn btn-primary" (click)="turnos()">Cantidad de turnos por especialidad</button>
         </div>
   </div>  
 <div *ngIf="conexioness">
@@ -27,22 +27,26 @@
 </div>
 
 <div *ngIf="turnoss">
-    <h2>Turnos</h2>
-    <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
-      <thead>
-        <tr>
-          <th>Email</th>
-          <th>Último día conexión</th>
-          <th>Última hora conexión</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let usuario of listadoUsuarios" >
-          <td>{{usuario.usuario}} </td>
-          <td>{{usuario.ult_conexion_dia}}</td>
-          <td>{{usuario.ult_conexion_hora}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="form-group">
+        <label><b>Especialidad:</b></label>
+        <select data-live-search="true" class="form-control" name="selectEspecialista" [(ngModel)]="idEspecialidad">
+          <option *ngFor="let esp of listadoEspecialidad" [value]="esp.id_especialidad">{{esp.descripcion}}</option>
+       </select>
+      </div>
+      <button class="btn btn-primary" (click)="traerTurnos()">Buscar</button>
+      <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+          <thead>
+              <tr>
+                <th>Especialista</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of listadoTurnos" >
+                  <td>{{usuario.email}} </td>
+                  <td>{{usuario.cantidad}}</td>
+                </tr>
+              </tbody>
+      </table>
   </div>
 </body>

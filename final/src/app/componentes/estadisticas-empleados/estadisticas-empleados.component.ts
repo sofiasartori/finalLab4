@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { registroUsuarioService } from 'src/app/servicios/registro-usuario.service';
+import { EspecialidadService } from 'src/app/servicios/especialidad.service';
+import { TurnoService } from 'src/app/servicios/turno.service';
 
 
 @Component({
@@ -13,9 +15,17 @@ export class EstadisticasEmpleadosComponent implements OnInit {
   listadoUsuarios: any;
   conexioness:string;
   turnoss:string;
+  especialidadServicio: EspecialidadService;
+  listadoEspecialidad: any;
+  idEspecialidad:number;
+  turnoServicio: TurnoService;
+  cantidadturnos: number;
+  listadoTurnos: any;
 
-  constructor(serviceUsuario: registroUsuarioService) {
+  constructor(serviceUsuario: registroUsuarioService, serviceEspecialidad: EspecialidadService, serviceTurno: TurnoService) {
     this.miServicio=serviceUsuario;
+    this.especialidadServicio = serviceEspecialidad;
+    this.turnoServicio=serviceTurno;
    }
 
   ngOnInit() {
@@ -28,6 +38,12 @@ export class EstadisticasEmpleadosComponent implements OnInit {
     })
   }
 
+  traerEspecialidad(){
+    this.especialidadServicio.traer('especialidad/', '').then(data=>{
+      this.listadoEspecialidad = data;
+    })
+  }
+
   conexiones(){
     this.conexioness='ok';
     this.turnoss='';
@@ -36,6 +52,13 @@ export class EstadisticasEmpleadosComponent implements OnInit {
   turnos(){
     this.conexioness='';
     this.turnoss='ok';
+    this.traerEspecialidad();
+  }
+
+  traerTurnos(){
+    this.turnoServicio.traerCantidadFechas('turnos/cantidad/' + this.idEspecialidad).then(data=>{
+      this.listadoTurnos=data;
+    })
   }
 
 }

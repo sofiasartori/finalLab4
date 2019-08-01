@@ -46,6 +46,7 @@ import { EstadisticasTurnosComponent } from './componentes/estadisticas-turnos/e
 import { AgmCoreModule } from '@agm/core';
 import { Angular2CsvModule } from 'angular2-csv';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { EstadisticasEspecialidadesComponent } from './componentes/estadisticas-especialidades/estadisticas-especialidades.component';
 
 
 const appRoutes: Routes = [
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
   { path: 'especialidad',  component: AltaEspecialidadComponent, canActivate:[AuthGuard]},
   { path: 'estadisticasEmpleados',  component: EstadisticasEmpleadosComponent, canActivate:[AuthGuard]},
   { path: 'estadisticasTurnos',  component: EstadisticasTurnosComponent, canActivate:[AuthGuard]},
+  { path: 'estadisticasEspecialidades',  component: EstadisticasEspecialidadesComponent, canActivate:[AuthGuard]},
   { path: 'contacto',  component: ContactoComponent}
   //{ path: '**', component: ErrorComponent }
 ];
@@ -106,7 +108,8 @@ const appRoutes: Routes = [
     AltaEspecialidadComponent,
     ContactoComponent,
     EstadisticasEmpleadosComponent,
-    EstadisticasTurnosComponent
+    EstadisticasTurnosComponent,
+    EstadisticasEspecialidadesComponent
   ],
   imports: [
     BrowserModule,

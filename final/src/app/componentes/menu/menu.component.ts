@@ -69,6 +69,10 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/estadisticasTurnos']);
   }
 
+  estadisticasEspecialidades(){
+    this.router.navigate(['/estadisticasEspecialidades']);
+  }
+
   abrirForm(){
     this.router.navigate(['/formulario-usuario']);
   }

@@ -5,6 +5,8 @@
           <button class="btn btn-primary" (click)="fechas()">Consultar cantidad por fechas</button>
           <button  class="btn btn-primary" (click)="turnosP()">Consultar por paciente</button>
           <button class="btn btn-primary" (click)="turnosR()">Consultar por recepcionista</button>
+          <button class="btn btn-primary" (click)="turnosE()">Consultar por especialidad</button>
+          <button class="btn btn-primary" (click)="turnosC()">Consultar cancelados por especialidad</button>
         </div>
   </div>  
 <div *ngIf='fechass'>
@@ -40,5 +42,38 @@
         </tr>
       </tbody>
     </table>
+</div>
+<div *ngIf="turnose || turnosc">
+    <div class="form-group">
+        <label><b>Especialidad:</b></label>
+        <select data-live-search="true" class="form-control" name="selectEspecialista" [(ngModel)]="idEspecialidad">
+          <option *ngFor="let esp of listadoEspecialidad" [value]="esp.id_especialidad">{{esp.descripcion}}</option>
+       </select>
+      </div>
+      <button (click)="trearTurnos()" class="btn btn-primary">Traer turnos</button>
+      <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+          <thead>
+              <tr>
+                <th>Dia</th>
+                <th>Hora</th>
+                <th>Especialista</th>
+                <th>Cliente</th>
+                <th>Recepcionista</th>
+                <th>Estado</th>
+                <th>Id Tratamiento</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of listadoTurnosE" >
+                  <td>{{t.dia}} </td>
+                  <td>{{t.hora}}</td>
+                  <td>{{t.id_especialista}} </td>
+                  <td>{{t.cliente}}</td>
+                  <td>{{t.recepcionista}} </td>
+                  <td>{{t.estado}}</td>
+                  <td>{{t.id_tratamiento}} </td>
+                </tr>
+              </tbody>
+      </table>
 </div>
 </body>
