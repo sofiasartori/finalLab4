@@ -31,8 +31,20 @@ export class ArchivosTurnoService {
 
   }
 
-  public cambiarEstado(ruta, id) {
-    return this.miHttp.httpPut(this.api + ruta + id, '');
+  public cambiarEstado(ruta, objeto) {
+    return this.miHttp.httpPut(this.api + ruta, objeto);
 
+  }
+
+  public traerCantidad(ruta, turno){
+    return this.miHttp.httpGetP(this.api + ruta, '')
+    .toPromise()
+    .then( data => {
+      console.log('Archivo turno');
+     // console.log( data );
+      return data;
+    }, err => {
+      console.log( err );
+    })
   }
 }

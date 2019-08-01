@@ -1,0 +1,43 @@
+<app-email-sesion></app-email-sesion><br>
+<app-boton-menu></app-boton-menu><br>
+<button (click)="conexiones()">Mostrar Conexiones</button>
+<button>Mostrar Turnos</button>
+<div *ngIf="conexioness">
+  <h2>Conexiones</h2>
+  <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Último día conexión</th>
+        <th>Última hora conexión</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of listadoUsuarios" >
+        <td>{{usuario.usuario}} </td>
+        <td>{{usuario.ult_conexion_dia}}</td>
+        <td>{{usuario.ult_conexion_hora}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="turnoss">
+    <h2>Turnos</h2>
+    <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Último día conexión</th>
+          <th>Última hora conexión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listadoUsuarios" >
+          <td>{{usuario.usuario}} </td>
+          <td>{{usuario.ult_conexion_dia}}</td>
+          <td>{{usuario.ult_conexion_hora}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

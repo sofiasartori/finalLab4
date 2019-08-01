@@ -14,6 +14,12 @@ require_once 'consultorioApi.php';
 include_once 'consultorio.php';
 require_once 'historiaApi.php';
 include_once 'historia.php';
+require_once 'encuestaApi.php';
+include_once 'encuesta.php';
+require_once 'tratamientoApi.php';
+include_once 'tratamiento.php';
+require_once 'especialidadApi.php';
+include_once 'especialidad.php';
 require_once 'MWparaCORS.php';
 require_once 'jwt.php';
 require_once 'mw.php';
@@ -36,7 +42,8 @@ $app->post('/login/', function(Request $request, Response $response){
 	$usuario=new Usuario();
 	$usuarioBuscado=$usuario->buscarUsuario($nombre, $clave);
 	$tipoJWT = $usuarioBuscado->tipo;
-	$data=array('Usuario'=>$nombre, 'Tipo'=>$tipoJWT);
+  $fotoJWT = $usuarioBuscado->foto;
+	$data=array('Usuario'=>$nombre, 'Tipo'=>$tipoJWT, 'Foto'=>$fotoJWT);
 	if(!isset($data['Tipo'])){
 		$newResponse = $response->withJSON("Usted no pertenece al sistema", 400);
 	}
@@ -52,16 +59,18 @@ $app->post('/login/', function(Request $request, Response $response){
 $app->group('/especialistas', function () {
 
   $this->get('/', \EspecialistaApi::class . ':traerTodos');
-  $this->get('/{id}', \MascotaApi::class . ':buscarUno');
+  $this->get('/clientes/', \EspecialistaApi::class . ':buscarUno');
   $this->post('/alta/', \MascotaApi::class . ':CargarUno');  
   $this->put('/', \MascotaApi::class . ':ModificarUno');
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/turnos', function () {
 
-  $this->get('/{filtro}', \TurnoApi::class . ':traerTodos');
+  $this->get('/', \TurnoApi::class . ':traerTodos');
   $this->post('/alta/', \TurnoApi::class . ':CargarUno');  
-  $this->put('/{id}', \TurnoApi::class . ':ModificarUno');
+  $this->put('/', \TurnoApi::class . ':ModificarUno');
+  $this->get('/{filtro}', \TurnoApi::class . ':buscarUno');
+  $this->get('/cliente/{filtro}', \TurnoApi::class . ':buscarCliente');
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/consultorios', function () {
@@ -72,8 +81,26 @@ $app->group('/consultorios', function () {
 
 $app->group('/historia', function () {
 
-  $this->get('/', \HistoriaApi::class . ':traerTodos');
+  $this->get('/{cliente}', \HistoriaApi::class . ':traerTodos');
   $this->post('/alta/', \HistoriaApi::class . ':CargarUno');  
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+$app->group('/encuesta', function () {
+
+  $this->get('/', \HistoriaApi::class . ':traerTodos');
+  $this->post('/alta/', \EncuestaApi::class . ':CargarUno');  
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+$app->group('/tratamiento', function () {
+
+  $this->get('/', \TratamientoApi::class . ':traerTodos');
+  $this->post('/alta/', \TratamientoApi::class . ':CargarUno');  
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+$app->group('/especialidad', function () {
+
+  $this->get('/', \EspecialidadApi::class . ':traerTodos');
+  $this->post('/alta/', \EspecialidadApi::class . ':CargarUno');  
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->run();

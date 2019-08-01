@@ -12,7 +12,7 @@ export class ArchivosEncuestaService {
 
 
   public insertarEncuesta(ruta, objeto) {
-    return this.miHttp.httpPostP2(this.api + ruta, JSON.stringify(objeto));
+    return this.miHttp.httpPostP(this.api + ruta, JSON.stringify(objeto));
 
   }
 }

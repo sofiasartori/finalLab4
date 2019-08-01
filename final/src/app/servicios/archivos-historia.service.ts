@@ -9,6 +9,18 @@ export class ArchivosHistoriaService {
   api = 'https://finallab4.000webhostapp.com/clinica/apirest.php/';
   constructor(public miHttp: MiHttpService) { }
 
+  public traerHistorias(ruta, filtro) {
+    return this.miHttp.httpGetP(this.api + ruta, filtro)
+    .toPromise()
+    .then( data => {
+      console.log('Archivo turno');
+     // console.log( data );
+      return data;
+    }, err => {
+      console.log( err );
+    })
+  }
+
   public insertar(ruta, objeto) {
     return this.miHttp.httpPostP(this.api + ruta, JSON.stringify(objeto));
 

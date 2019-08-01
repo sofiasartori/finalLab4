@@ -4,6 +4,9 @@ import { TurnoService } from '../../servicios/turno.service';
 import { Turno } from '../../clases/turno';
 import { EspecialidadesService } from 'src/app/servicios/especialista.service';
 import { ConsultoriosService } from 'src/app/servicios/consultorios.service';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogoTurnoComponent } from '../dialogo-turno/dialogo-turno.component';
+import { TratamientoService } from 'src/app/servicios/tratamiento.service';
 
 @Component({
   selector: 'app-pedir-turno',
@@ -18,12 +21,19 @@ export class PedirTurnoComponent implements OnInit {
   miEspecialista: EspecialidadesService;
   especialistas: any;
   idEspecialista: number;
+  idTratamiento: number;
   miConsultorioServicio: ConsultoriosService;
+  miTratamientoServicio: TratamientoService;
+  tratamiento: any;
+  clientes: any;
+  recepcionista: string='';
+  cliente: string;
   
-  constructor(serviceTurno: TurnoService, private builder: FormBuilder, serviceEspecialidad: EspecialidadesService, serviceConsultorio: ConsultoriosService) {
+  constructor(serviceTurno: TurnoService, private builder: FormBuilder, serviceEspecialidad: EspecialidadesService, serviceConsultorio: ConsultoriosService, private dialogo: MatDialog, serviceTratamiento: TratamientoService) {
     this.miTurnoServicio = serviceTurno;
     this.miEspecialista = serviceEspecialidad;
     this.miConsultorioServicio = serviceConsultorio;
+    this.miTratamientoServicio = serviceTratamiento;
    }
 
   dia = new FormControl('', [
@@ -35,7 +45,7 @@ export class PedirTurnoComponent implements OnInit {
   ]);
 
   especialista = new FormControl('', [
-    //Validators.required
+    Validators.required
   ]);
 
   
@@ -47,22 +57,30 @@ export class PedirTurnoComponent implements OnInit {
 
 
   ngOnInit() {
+    if(localStorage.getItem('tipo')==="recepcionista")
+      this.recepcionista='ok';
     this.traerEspecialistas();
+    this.traerTratamientos();
+    this.traerClientes();
   }
 
   crearTurno()
   {    
     this.SeCreoUnTurno.emit(this.nuevoTurno);
+    this.nuevoTurno.id_tratamiento=this.idTratamiento;
     this.nuevoTurno.id_especialista=this.idEspecialista;
-    //id=select id_consultorio from consultorios where estado="libre";
-    //this.nuevoTurno.id_consultorio=id;
-    this.nuevoTurno.id_especialista=this.idEspecialista;
-    this.nuevoTurno.cliente = localStorage.getItem('email');
+    if(!this.recepcionista)
+      this.nuevoTurno.cliente = localStorage.getItem('email');
+    else{
+      this.nuevoTurno.cliente = this.cliente;
+      this.nuevoTurno.recepcionista = localStorage.getItem('email');
+    }      
     this.nuevoTurno.id_consultorio=Math.floor(Math.random()*(+7-+1)) + +1;
     
     this.miTurnoServicio.insertar('turnos/alta/', this.nuevoTurno);
     this.cambiarEstadoConsultorio();
     this.nuevoTurno=null;
+    this.abrirDialogo();
   }
   hacerNuevoTurno()
   {
@@ -77,7 +95,23 @@ export class PedirTurnoComponent implements OnInit {
   }
 
   cambiarEstadoConsultorio(){
-    this.miConsultorioServicio.cambiarEstado(this.nuevoTurno.id_consultorio , '','Proximo_a_ocupar');
+    this.miConsultorioServicio.cambiarEstado(this.nuevoTurno.id_consultorio , 'p','Proximo_a_ocupar');
+  }
+
+  abrirDialogo() {
+    this.dialogo.open(DialogoTurnoComponent);
+  }
+
+  traerTratamientos(){
+    this.miTratamientoServicio.traer('tratamiento/', '').then(data=>{
+      this.tratamiento=data;
+    })
+  }
+
+  traerClientes(){
+    return this.miEspecialista.traertodos('especialistas/clientes/', '').then(data=>{
+      this.clientes=data;
+    })
   }
 
 }

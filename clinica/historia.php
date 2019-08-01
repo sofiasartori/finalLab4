@@ -7,8 +7,13 @@ class Historia
 	public $comentario;
 	
     public function traerTodos($request, $response, $args){
+    	$cliente=$args['cliente'];
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+<<<<<<< HEAD
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT id_consultorio, estado, atencion FROM id9856454_clinica.consultorios");
+=======
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.historia_clinica where cliente='$cliente'");
+>>>>>>> 7cd0bc1372a8a3343d945db08c04e3be4a16cf95
 		$consulta->execute();
 		
 

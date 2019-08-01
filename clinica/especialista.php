@@ -46,12 +46,19 @@ class Especialista
 		$consulta->execute();
 	}
 
-	public function buscarUsuario($email, $password){
+	public function buscarUsuario(){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+<<<<<<< HEAD
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM id9856454_clinica.usuarios where email='$email' AND password='$password'");
+=======
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM clinica.usuarios where tipo='cliente'");
+>>>>>>> 7cd0bc1372a8a3343d945db08c04e3be4a16cf95
 		$consulta->execute();
-		$usuarioBuscado=$consulta->fetchObject('Usuario');
-		return $usuarioBuscado;
+		$miArray = Array();
+		while($i=$consulta->fetch()){
+			array_push($miArray, $i);		
+		}
+		echo json_encode($miArray);
 	}
 
 	public function logConexion($email){

@@ -1,4 +1,5 @@
 export class Turno {
+    id_turno: number;
     dia: string;
     hora: string;
     id_especialista: number;

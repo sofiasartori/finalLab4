@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   administrador='';
   especialista='';
   recepcionista='';
+  admin='';
   constructor(private router: Router) { }
   
 
@@ -23,8 +24,10 @@ export class MenuComponent implements OnInit {
     else if(localStorage.getItem("tipo")==="especialista"){
       this.especialista='especialista';
     }
-    else
+    else if(localStorage.getItem("tipo")==="recepcionista")
       this.recepcionista="recepcionista";
+    else
+      this.admin='ok';
   }
 
   listadoConsultorios(){
@@ -47,4 +50,23 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/listaTurnos']);
   }
 
+  historiaCliente(){
+    this.router.navigate(['/historiaCliente']);
+  }
+
+  insertarTratamiento(){
+    this.router.navigate(['/tratamiento']);
+  }
+
+  insertarEspecialidad(){
+    this.router.navigate(['/especialidad']);
+  }
+
+  estadisticasEmpleados(){
+    this.router.navigate(['/estadisticasEmpleados']);
+  }
+
+  estadisticasTurnos(){
+    this.router.navigate(['/estadisticasTurnos']);
+  }
 }

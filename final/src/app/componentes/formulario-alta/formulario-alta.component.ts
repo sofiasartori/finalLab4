@@ -14,6 +14,7 @@ export class FormularioAltaComponent implements OnInit {
   @Output() SeCreoUnUsuario: EventEmitter<any>= new EventEmitter<any>();
   nuevoUsuario: Usuario;
   miUsuarioServicio: registroUsuarioService;
+  usuarioInsertado: any;
   
   constructor(serviceUsuario: registroUsuarioService, private builder: FormBuilder, private router: Router) {
     this.miUsuarioServicio = serviceUsuario;
@@ -52,6 +53,11 @@ export class FormularioAltaComponent implements OnInit {
     this.SeCreoUnUsuario.emit(this.nuevoUsuario);
     
     this.miUsuarioServicio.insertar('usuario/alta', this.nuevoUsuario);
+    
+    if(this.nuevoUsuario.tipo==="especialista"){
+      this.nuevoUsuario=null;
+      this.router.navigate(['/disponibilidad']);
+    }
     this.nuevoUsuario=null;
   }
   hacerNuevoUsuario()

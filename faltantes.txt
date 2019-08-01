@@ -22,6 +22,10 @@ poner color al estado de los turnos (OK)
 estadisticas empleados (poner un select por empleado)
 cantidad de turnos por especialidad (cuando se le pueda asignar la especialidad al odontologo 
 se tiene que ver de ponerlo para pedir turno y mandarlo a la tabla de turnos)
+<<<<<<< HEAD
 para todas las demas estadisticas se necesita lo de especialidad
 
 https://finallab4.000webhostapp.com/clinica/apirest.php/
+=======
+para todas las demas estadisticas se necesita lo de especialidad
+>>>>>>> 7cd0bc1372a8a3343d945db08c04e3be4a16cf95

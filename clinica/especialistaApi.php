@@ -21,8 +21,7 @@ class especialistaApi extends Especialista implements IApiUsable
     }
 
     public function BuscarUno($request, $response, $args){
-    	$email=$args['email'];
-    	$consulta = Usuario::buscarUsuario($email);
+    	$consulta = Especialista::buscarUsuario();
     }
 
     public function ModificarUno($request, $response, $args){

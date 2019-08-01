@@ -14,7 +14,7 @@ export class FechaTurnosComponent implements OnInit {
   }
 
   seleccionarFecha(filtro) {
-    this.onDateSelected.emit(filtro)
+    this.onDateSelected.emit(filtro);
   }  
 
 }

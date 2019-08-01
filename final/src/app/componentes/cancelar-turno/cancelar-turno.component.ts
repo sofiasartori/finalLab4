@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TurnoService } from 'src/app/servicios/turno.service';
+import { Turno } from 'src/app/clases/turno';
 
 @Component({
   selector: 'app-cancelar-turno',
@@ -7,11 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CancelarTurnoComponent implements OnInit {
 
-  constructor() { }
+  @Input() idTurno: number;
+  miTurnoServicio: TurnoService;
+  turno: Turno = new Turno("", "", 0, "", "", 0, "", 0);
+  constructor(serviceTurno: TurnoService) {
+    this.miTurnoServicio=serviceTurno;
+   }
 
   ngOnInit() {
   }
 
-  cancelar(){}
+  cancelar(){
+    this.turno.id_turno=this.idTurno;
+    this.turno.estado='cancelado';
+    this.miTurnoServicio.cambiarEstado('turnos/', this.turno);
+  }
 
 }

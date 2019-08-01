@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { TurnoService } from '../../servicios/turno.service';
 
 @Component({
@@ -22,17 +22,45 @@ export class ListarTurnoComponent implements OnInit {
     if(localStorage.getItem("tipo")==="recepcionista"){
       this.recepcionista='ok';
     }
-    else{
+    else if(localStorage.getItem("tipo")==="especialista"){
       this.especialista='ok';
     }
-    this.TraerTodos();
+    if(!this.especialista){
+      this.TraerTodos();  
+    }
+    else if(!this.especialista && !this.recepcionista){
+      this.TraerPorPaciente();
+    }
+    else{
+      this.TraerPorFecha();
+    }
+    
+    
   }
+
+  ngOnChanges(changes: SimpleChanges){
+    this.TraerPorFecha();
+  }
+
   TraerTodos() {
+    this.miTurnoServicio.traertodos('turnos/', '').then(data => {
+      this.listado = data
+      console.log(data)
+    })
+  }
+
+  TraerPorFecha() {
     this.miTurnoServicio.traertodos('turnos/', this.filtro).then(data => {
       this.listado = data
       console.log(data)
     })
   }
 
+  TraerPorPaciente() {
+    this.miTurnoServicio.traertodos('turnos/cliente/', localStorage.getItem('email')).then(data => {
+      this.listado = data
+      console.log(data)
+    })
+  }
   
 }
