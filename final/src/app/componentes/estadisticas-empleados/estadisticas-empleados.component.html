@@ -1,9 +1,11 @@
 <app-menu></app-menu>
 <body style="background-image: url('../assets/background.jpg')"><br>
-  <div class="btn-group">
-    <button class="btn btn-primary" (click)="conexiones()">Mostrar Conexiones</button>
-    <button class="btn btn-primary">Mostrar Turnos</button>
-  </div>
+  <div class="text-center">
+      <div  class="btn-group">
+          <button class="btn btn-primary" (click)="conexiones()">Mostrar Conexiones</button>
+          <button class="btn btn-primary">Mostrar Turnos</button>
+        </div>
+  </div>  
 <div *ngIf="conexioness">
   <h2>Conexiones</h2>
   <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">

@@ -28,6 +28,7 @@ export class PedirTurnoComponent implements OnInit {
   clientes: any;
   recepcionista: string='';
   cliente: string;
+  exampleModal:any;
   
   constructor(serviceTurno: TurnoService, private builder: FormBuilder, serviceEspecialidad: EspecialidadesService, serviceConsultorio: ConsultoriosService, private dialogo: MatDialog, serviceTratamiento: TratamientoService) {
     this.miTurnoServicio = serviceTurno;
@@ -80,7 +81,9 @@ export class PedirTurnoComponent implements OnInit {
     this.miTurnoServicio.insertar('turnos/alta/', this.nuevoTurno);
     this.cambiarEstadoConsultorio();
     this.nuevoTurno=null;
-    this.abrirDialogo();
+    //this.abrirDialogo();
+    this.exampleModal.on('shown.bs.modal', function () {
+    })
   }
   hacerNuevoTurno()
   {

@@ -1,10 +1,12 @@
 <app-menu></app-menu>
 <body style="background-image: url('../assets/background.jpg')"><br>
-  <div class="btn-group">
-    <button class="btn btn-primary" (click)="fechas()">Consultar cantidad por fechas</button>
-    <button  class="btn btn-primary" (click)="turnosP()">Consultar por paciente</button>
-    <button class="btn btn-primary" (click)="turnosR()">Consultar por recepcionista</button>
-  </div>
+  <div class="text-center">
+      <div class="btn-group">
+          <button class="btn btn-primary" (click)="fechas()">Consultar cantidad por fechas</button>
+          <button  class="btn btn-primary" (click)="turnosP()">Consultar por paciente</button>
+          <button class="btn btn-primary" (click)="turnosR()">Consultar por recepcionista</button>
+        </div>
+  </div>  
 <div *ngIf='fechass'>
   <h2>Turnos por fechas</h2>
   <form [formGroup]="fechasForm" (ngSubmit)="buscar()">

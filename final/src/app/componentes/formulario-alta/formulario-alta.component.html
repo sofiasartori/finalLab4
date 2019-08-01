@@ -1,13 +1,13 @@
 <app-menu></app-menu>
 <body style="background-image: url('../assets/background.jpg')">
-<div *ngIf="!nuevoUsuario">
+<div *ngIf="!nuevoUsuario" class="text-center">
 
 
   <button class="btn btn-lg btn-warning"  (click)="hacerNuevoUsuario()">Nuevo Usuario</button>
 
 
 </div>
-<div *ngIf="nuevoUsuario">
+<div *ngIf="nuevoUsuario" class="text-center">
   <form [formGroup]="altaForm" class="" (ngSubmit)="crearUsuario()" >
     <div class="form-group">
       <label><b>Email:</b></label>

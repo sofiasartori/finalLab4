@@ -2,7 +2,7 @@
   <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevaEncuesta()">Tomar encuesta</button>
 </div>-->
 <body style="background-image: url('../assets/background.jpg')">
-<div *ngIf="idTurno">
+<div class="text-center" *ngIf="idTurno">
   <form [formGroup]="encuestaForm" class="" (ngSubmit)="completar()" >
     <div class="form-group">
       <label><b>Puntuación de la clínica:</b></label>
@@ -14,7 +14,7 @@
     </div>
     
       <label><b>Comentarios:</b></label>
-      <div class="row align-items-center">
+      <div class="text-center">
         <textarea maxlength="66"[(ngModel)]="nuevaEncuesta.opinion" [formControl]="comentarios" required></textarea>
       </div>
     
