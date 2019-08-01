@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { registroUsuarioService } from 'src/app/servicios/registro-usuario.service';
+
 
 @Component({
   selector: 'app-estadisticas-empleados',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstadisticasEmpleadosComponent implements OnInit {
 
-  constructor() { }
+  miServicio: registroUsuarioService;
+  listadoUsuarios: any;
+  conexioness:string;
+  turnoss:string;
+
+  constructor(serviceUsuario: registroUsuarioService) {
+    this.miServicio=serviceUsuario;
+   }
 
   ngOnInit() {
+    this.traerLogs();
+  }
+
+  traerLogs(){
+    this.miServicio.traertodos('usuarios/', '').then(data=>{
+      this.listadoUsuarios = data;
+    })
+  }
+
+  conexiones(){
+    this.conexioness='ok';
+    this.turnoss='';
+  }
+
+  turnos(){
+    this.conexioness='';
+    this.turnoss='ok';
   }
 
 }

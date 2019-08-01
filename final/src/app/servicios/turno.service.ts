@@ -26,4 +26,10 @@ export class TurnoService {
    return this.miHttp.cambiarEstado('turnos/', turno);
  }
 
+ traerCantidadFechas(ruta: string){
+  return this.miHttp.traerCantidad(ruta, '').then(data => {
+    return data;
+  });
+ }
+
 }

@@ -62,4 +62,11 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/especialidad']);
   }
 
+  estadisticasEmpleados(){
+    this.router.navigate(['/estadisticasEmpleados']);
+  }
+
+  estadisticasTurnos(){
+    this.router.navigate(['/estadisticasTurnos']);
+  }
 }

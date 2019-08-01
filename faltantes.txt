@@ -18,3 +18,8 @@ del recepcionista falta:
 en el header, mostrar foto del usuario (OK)
 
 poner color al estado de los turnos (OK)
+
+estadisticas empleados (poner un select por empleado)
+cantidad de turnos por especialidad (cuando se le pueda asignar la especialidad al odontologo 
+se tiene que ver de ponerlo para pedir turno y mandarlo a la tabla de turnos)
+para todas las demas estadisticas se necesita lo de especialidad

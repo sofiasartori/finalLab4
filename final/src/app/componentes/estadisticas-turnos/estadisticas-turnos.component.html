@@ -1,0 +1,39 @@
+<app-email-sesion></app-email-sesion><br>
+<app-boton-menu></app-boton-menu><br>
+<button (click)="fechas()">Consultar cantidad por fechas</button>
+<button (click)="turnosP()">Consultar por paciente</button>
+<button (click)="turnosR()">Consultar por recepcionista</button>
+<div *ngIf='fechass'>
+  <h2>Turnos por fechas</h2>
+  <form [formGroup]="fechasForm" (ngSubmit)="buscar()">
+    Fecha desde: <input type="date" [(ngModel)]="fecha_desde" [formControl]="fechaDesde" required>
+    Fecha hasta: <input type="date" [(ngModel)]="fecha_hasta" [formControl]="fechaHasta" required>
+    <button type="submit" [disabled]="!fechasForm.valid">Buscar</button> 
+  </form>
+  <label *ngIf='cantidad'>Cantidad de turnos: {{cantidad.cantidad}}</label>
+</div>
+
+<div *ngIf='turnoss'>
+  <table class="table table-condensed" style="border-width: 2px; border-color: black; border-style: solid;">
+      <thead>
+        <tr>
+          <th>Dia</th>
+          <th>Hora</th>
+          <th *ngIf="!recepcionista">Cliente</th>
+          <th *ngIf="recepcionista">Recepcionista</th>
+          <th>Consultorio</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let turno of listado" >
+          <td>{{turno.dia}} </td>
+          <td>{{turno.hora}} </td>
+          <td *ngIf="!recepcionista">{{turno.cliente}} </td>
+          <td *ngIf="recepcionista">{{turno.recepcionista}} </td>
+          <td>{{turno.id_consultorio}}</td>
+          <td>{{turno.estado}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
