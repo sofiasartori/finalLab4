@@ -21,8 +21,19 @@ class especialidadApi extends Especialidad implements IApiUsable
     }
 
     public function BuscarUno($request, $response, $args){
-    	$email=$args['email'];
-    	$consulta = Usuario::buscarUsuario($email);
+    	$consulta = Especialidad::masUsada();
+    }
+
+    public function BuscarMenos($request, $response, $args){
+        $consulta = Especialidad::menosUsada($request, $response, $args);
+    }
+
+    public function BuscarMejor($request, $response, $args){
+        $consulta = Especialidad::mejorComentario($request, $response, $args);
+    }
+
+    public function BuscarPeor($request, $response, $args){
+        $consulta = Especialidad::peorComentario($request, $response, $args);
     }
 
     public function ModificarUno($request, $response, $args){

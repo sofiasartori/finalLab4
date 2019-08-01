@@ -14,12 +14,21 @@ estadisticas
 del recepcionista falta:
 -dar turnos por cliente y tratamiento (OK)
 -conectar servicio en cancelar turno (OK)
-
 en el header, mostrar foto del usuario (OK)
-
 poner color al estado de los turnos (OK)
 
 estadisticas empleados (poner un select por empleado)
 cantidad de turnos por especialidad (cuando se le pueda asignar la especialidad al odontologo 
 se tiene que ver de ponerlo para pedir turno y mandarlo a la tabla de turnos)
 para todas las demas estadisticas se necesita lo de especialidad
+
+https://finallab4.000webhostapp.com/clinica/apirest.php/
+
+necesito traer de la tabla de disponibilidad medico, una fecha y una especialidad y tengo que devolver los
+datos del medico y el horario de llegada y salida
+
+necesito devolver de la tabla de turnos se pasa una fecha y especialidad y se devuelve la hora, 
+id_especialista, estado asignado, id_horario
+
+en disponibilidad se tiene que poner el id_especialista + la validacion del sabado ok
+cambiar el alta de usuarios para q solo lo haga el admin

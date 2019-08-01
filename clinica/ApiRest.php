@@ -20,6 +20,8 @@ require_once 'tratamientoApi.php';
 include_once 'tratamiento.php';
 require_once 'especialidadApi.php';
 include_once 'especialidad.php';
+require_once 'disponibilidadApi.php';
+include_once 'disponibilidad.php';
 require_once 'MWparaCORS.php';
 require_once 'jwt.php';
 require_once 'mw.php';
@@ -32,7 +34,8 @@ $app->group('/usuarios', function () {
   $this->get('/', \UsuarioApi::class . ':traerTodos');
   $this->post('/alta/', \UsuarioApi::class . ':CargarUno');  
   $this->delete('/{id}', \UsuarioApi::class . ':borrarUno');
-  $this->get('/{email}', \UsuarioApi::class . ':buscarUno')->add(\MWparaAutentificar::class . ':VerificarUsuario');
+  $this->get('/{email}', \UsuarioApi::class . ':buscarUno');
+  $this->get('/id/{email}', \UsuarioApi::class . ':TraerId');
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->post('/login/', function(Request $request, Response $response){
@@ -43,7 +46,8 @@ $app->post('/login/', function(Request $request, Response $response){
 	$usuarioBuscado=$usuario->buscarUsuario($nombre, $clave);
 	$tipoJWT = $usuarioBuscado->tipo;
   $fotoJWT = $usuarioBuscado->foto;
-	$data=array('Usuario'=>$nombre, 'Tipo'=>$tipoJWT, 'Foto'=>$fotoJWT);
+  $idJWT = $usuarioBuscado->id_usuario;
+	$data=array('Usuario'=>$nombre, 'Tipo'=>$tipoJWT, 'Foto'=>$fotoJWT, 'ID'=>$idJWT);
 	if(!isset($data['Tipo'])){
 		$newResponse = $response->withJSON("Usted no pertenece al sistema", 400);
 	}
@@ -69,8 +73,21 @@ $app->group('/turnos', function () {
   $this->get('/', \TurnoApi::class . ':traerTodos');
   $this->post('/alta/', \TurnoApi::class . ':CargarUno');  
   $this->put('/', \TurnoApi::class . ':ModificarUno');
-  $this->get('/{filtro}', \TurnoApi::class . ':buscarUno');
+  $this->get('/especialista/{filtro}/{especialista}', \TurnoApi::class . ':buscarUno');
   $this->get('/cliente/{filtro}', \TurnoApi::class . ':buscarCliente');
+  $this->get('/fecha/{especialidad}/{fecha}', \TurnoApi::class . ':buscarFechaEspecialidad');
+  $this->get('/cantidad/{especialidad}', \TurnoApi::class . ':cantidadTurnosEspecialidad');
+  $this->get('/cantidad/fechas/{fecha_desde}/{fecha_hasta}', \TurnoApi::class . ':cantidadTurnosFechas');
+  $this->get('/quien/{quien}', \TurnoApi::class . ':buscarVarios');
+  $this->get('/turnos/{especialidad}', \TurnoApi::class . ':buscarTurnosEspecialidad');
+  $this->get('/turnos/cancelados/{especialidad}', \TurnoApi::class . ':buscarTurnosCEspecialidad');
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+$app->group('/disponibilidad', function () {
+
+  $this->get('/{id}', \DisponibilidadApi::class . ':traerTodos');
+  $this->post('/alta/', \DisponibilidadApi::class . ':CargarUno');  
+  $this->get('/{fecha}/{especialidad}', \DisponibilidadApi::class . ':buscarUno');
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/consultorios', function () {
@@ -101,6 +118,10 @@ $app->group('/especialidad', function () {
 
   $this->get('/', \EspecialidadApi::class . ':traerTodos');
   $this->post('/alta/', \EspecialidadApi::class . ':CargarUno');  
+  $this->get('/mas/', \EspecialidadApi::class . ':buscarUno');
+  $this->get('/menos/', \EspecialidadApi::class . ':buscarMenos');
+  $this->get('/mejor/', \EspecialidadApi::class . ':buscarMejor');
+  $this->get('/peor/', \EspecialidadApi::class . ':buscarPeor');
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->run();
