@@ -1,4 +1,5 @@
 <app-menu *ngIf="!especialista"></app-menu>
+<body style="background-image: url('../assets/background.jpg')">
 <table id="contentToConvert" class="table table-striped">
     <thead>
       <tr>
@@ -33,3 +34,4 @@
   </table>
 <input type="button" class="btn btn-primary" value="Descargar PDF" (click)="captureScreen()"/> 
 <angular2csv [data]="listado" filename="CSV_FILE" [options]="options"></angular2csv>
+</body>

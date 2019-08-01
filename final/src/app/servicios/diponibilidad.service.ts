@@ -9,7 +9,7 @@ export class DiponibilidadService {
 
   constructor(private miHttp: ArchivosDiponibilidadService) {}
 
-  insertar(ruta: string, encuesta: any){
+  insertar(ruta: string, Disponibilidad: any){
     return this.miHttp.insertar(ruta, Disponibilidad);
    }
 }

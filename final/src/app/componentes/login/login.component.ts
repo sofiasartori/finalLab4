@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     this.usuario.email='';
     this.codigo1 = Math.floor((Math.random() * 20) + 1);
     this.codigo2 = Math.floor((Math.random() * 20) + 1);    
-    this.loading=true;
    }
 
   email = new FormControl('', [
@@ -62,6 +61,7 @@ export class LoginComponent implements OnInit {
     let token: any;
     let tipo: string;
     let foto: string;
+    this.loading=true;
   	if((this.codigo1 + this.codigo2) == this.respuestaCaptcha) {
                 setTimeout(()=>{
                   this.loading=false;
@@ -75,18 +75,19 @@ export class LoginComponent implements OnInit {
                     tipo = token.data.Tipo;
                     foto=token.data.Foto;
                     localStorage.setItem(this.tipoLocal, tipo);
+                    localStorage.setItem('ID', token.data.ID);
                     localStorage.setItem('foto', foto);
                     this.router.navigate(['/menu']);                  
                   },
                   msg=>{
                     this.router.navigate(['/errorLogin']);
                   })
-              }, 4000)}else {
-  		          this.error = "Captcha invalido!";
-  	            }  	
-                
-      
-    
+              }, 3000)}else {
+                setTimeout(()=>{
+                  this.error = "Captcha invalido!";
+                  this.loading=false;
+                },1000)                
+  	            }    
   }
 
   volverInicio(){

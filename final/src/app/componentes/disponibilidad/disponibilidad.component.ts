@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Disponibilidad } from 'src/app/clases/disponibilidad';
 import { EspecialidadService } from 'src/app/servicios/especialidad.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DiponibilidadService } from 'src/app/servicios/diponibilidad.service';
 
 @Component({
@@ -10,15 +10,15 @@ import { DiponibilidadService } from 'src/app/servicios/diponibilidad.service';
   styleUrls: ['./disponibilidad.component.css']
 })
 export class DisponibilidadComponent implements OnInit {
-  disponibilidad: Disponibilidad;
-  dias: Array<DisponibilidadMedico> = [{ horario_llegada: '08:00', horario_salida: '19:00' }];
+  nuevaDisponibilidad: Disponibilidad;
+  dias: Array<DisponibilidadMedico>= []
   miEspecialidadServicio: EspecialidadService;
   especialidad: any;
   error = '';
   id_usuario:number;
   sub: any;
   miDisponibilidadServicio: DiponibilidadService;
-  constructor(serviceEspecialidad: EspecialidadService, private route: ActivatedRoute, serviceDisponibilidad: DiponibilidadService) {
+  constructor(serviceEspecialidad: EspecialidadService, private route: ActivatedRoute, serviceDisponibilidad: DiponibilidadService, private router: Router) {
     this.miEspecialidadServicio = serviceEspecialidad;
     this.miDisponibilidadServicio = serviceDisponibilidad;
   }
@@ -26,6 +26,8 @@ export class DisponibilidadComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id_usuario = params['id_usuario'];
+      this.dias = [{id_especialista: this.id_usuario, horario_llegada: '08:00', horario_salida: '19:00' }];
+
       });
     this.traerEspecialidad();
   }
@@ -61,10 +63,15 @@ export class DisponibilidadComponent implements OnInit {
           if (dia.horario_llegada < '08:00' || dia.horario_salida > '19:00')
             return 'El horario de atencion de lunes a viernes es de 8 a 19hs';
         }
-      } /*else {
+      } else {
         return 'Faltan llenar uno o mas campos'
-      }*/
+      }
     }
+    for (let i = 0; i < this.dias.length; i++) {
+     this.miDisponibilidadServicio.insertar('disponibilidad/alta/', this.dias[i]);
+    }
+    this.nuevaDisponibilidad=null;
+    this.router.navigate(['/menu']);
   }
 
   checkDuplicateInObject(propertyName, inputArray) {
@@ -87,8 +94,8 @@ export class DisponibilidadComponent implements OnInit {
     return seenDuplicate;
   }
 
-  insertar(){
-    this.miDisponibilidadServicio.insertar('disponibilidad/', this.disponibilidad);
+  hacerNuevaDisponibilidad(){
+    this.nuevaDisponibilidad = new Disponibilidad(0, 0, 0, "", "");
   }
 
 }

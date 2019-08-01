@@ -1,33 +1,38 @@
 <app-menu></app-menu>
-
+<body style="background-image: url('../assets/background.jpg')">
 <div *ngIf="!nuevoUsuario">
 
 
-  <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevoUsuario()">Nuevo Usuario</button>
+  <button class="btn btn-lg btn-warning"  (click)="hacerNuevoUsuario()">Nuevo Usuario</button>
 
 
 </div>
 <div *ngIf="nuevoUsuario">
-  <form [formGroup]="altaForm" class="modal-content animate" (ngSubmit)="crearUsuario()" >
-    <div class="container">
+  <form [formGroup]="altaForm" class="" (ngSubmit)="crearUsuario()" >
+    <div class="form-group">
       <label><b>Email:</b></label>
       <input type="email" [(ngModel)]="nuevoUsuario.email" placeholder="email" [formControl]="email" required>
-      <label>Password:
+    </div>
+    <div class="form-group">
+      <label><b>Password:</b>
         <input type="password" [(ngModel)]="nuevoUsuario.password" placeholder="password" [formControl]="password" required>
       </label>
+    </div>
+    <div class="form-group">
       <label><b>Tipo:</b></label>
       <select [(ngModel)]="nuevoUsuario.tipo"  [formControl]="tipo" required>
         <option value="cliente">Cliente</option>
         <option value="recepcionista">Recepcionista</option>
         <option value="especialista">Especialista</option>
       </select>
+    </div>
       <div class="form-group">
         <label><b>Foto:</b></label>
         <input #imageInput type="file" accept="image/*" (change)="handleFileSelect($event)" [formControl]="foto" required>
       </div>
       <div>
-        <button type="submit" [disabled]="!altaForm.valid">Crear</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!altaForm.valid">Crear</button>
       </div>
-    </div>
   </form>
   </div>
+</body>

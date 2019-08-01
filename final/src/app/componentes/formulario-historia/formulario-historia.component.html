@@ -1,12 +1,13 @@
+<body style="background-image: url('../assets/background.jpg')">
 <div *ngIf="nuevaHistoria">
-  <form [formGroup]="historiaForm" class="modal-content animate" (ngSubmit)="completarHistoria()" >
+  <form [formGroup]="historiaForm" class="" (ngSubmit)="completarHistoria()" >
     <div class="container">
       <label><b>Observaciones del paciente:</b></label>
       <textarea maxlength="66" [(ngModel)]="nuevaHistoria.comentario" [formControl]="observaciones" required></textarea>
       <div>
-        <button type="submit" [disabled]="!historiaForm.valid">Añadir</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!historiaForm.valid">Añadir</button>
       </div>
     </div>
   </form>
   </div>
-
+</body>

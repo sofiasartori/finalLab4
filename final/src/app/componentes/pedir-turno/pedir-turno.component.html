@@ -1,13 +1,14 @@
 <app-menu></app-menu>
+<body style="background-image: url('../assets/background.jpg')">
 <div *ngIf="!nuevoTurno">
 
 
-    <button class="btn btn-lg btn-warning btn-block"  (click)="hacerNuevoTurno()">Nuevo Turno</button>
+    <button class="btn btn-lg btn-warning"  (click)="hacerNuevoTurno()">Nuevo Turno</button>
   
   
   </div>
   <div *ngIf="nuevoTurno">
-    <form [formGroup]="altaTurnoForm" class="modal-content animate" (ngSubmit)="crearTurno()" >
+    <form [formGroup]="altaTurnoForm" class="" (ngSubmit)="crearTurno()" >
       <div class="form-group">
         <label><b>Dia:</b></label>
         <input type="date" class="form-control" [(ngModel)]="nuevoTurno.dia" placeholder="dia" [formControl]="dia" required>
@@ -40,3 +41,4 @@
     </form>
     </div>
 
+</body>

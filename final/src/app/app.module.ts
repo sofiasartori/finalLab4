@@ -66,7 +66,7 @@ const appRoutes: Routes = [
   { path: 'historiaClinica',  component: FormularioHistoriaComponent, canActivate:[AuthGuard]},
   { path: 'encuesta/:idTurno',  component: EncuestaComponent, canActivate:[AuthGuard]},
   { path: 'historiaCliente',  component: VerHistoriasComponent, canActivate:[AuthGuard]},
-  { path: 'disponibilidad/:id_usuario',  component: DisponibilidadComponent},
+  { path: 'disponibilidad/:id_usuario',  component: DisponibilidadComponent, canActivate:[AuthGuard]},
   { path: 'tratamiento',  component: AltaTratamientoComponent, canActivate:[AuthGuard]},
   { path: 'especialidad',  component: AltaEspecialidadComponent, canActivate:[AuthGuard]},
   { path: 'estadisticasEmpleados',  component: EstadisticasEmpleadosComponent, canActivate:[AuthGuard]},

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { TurnoService } from '../../servicios/turno.service';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { registroUsuarioService } from 'src/app/servicios/registro-usuario.service';
 
 @Component({
   selector: 'app-listar-turno',
@@ -15,6 +16,8 @@ export class ListarTurnoComponent implements OnInit {
   miTurnoServicio: TurnoService;
   recepcionista = '';
   especialista = '';
+  id_especialista: number;
+  miUsuarioServicio: registroUsuarioService;
   options = {
     fieldSeparator: ';',
     quoteStrings: '"',
@@ -30,24 +33,22 @@ export class ListarTurnoComponent implements OnInit {
       'id_consultorio', 'estado', 'id_tratamiento']
   };
 
-  constructor(serviceTurno: TurnoService) {
+  constructor(serviceTurno: TurnoService, serviceUsuario: registroUsuarioService) {
     this.miTurnoServicio = serviceTurno;
+    this.miUsuarioServicio = serviceUsuario;
   }
   ngOnInit() {
     if (localStorage.getItem("tipo") === "recepcionista") {
       this.recepcionista = 'ok';
+      this.TraerTodos();
     }
     else if (localStorage.getItem("tipo") === "especialista") {
       this.especialista = 'ok';
-    }
-    if (!this.especialista) {
-      this.TraerTodos();
+      this.id_especialista = parseInt(localStorage.getItem('ID'));
+      this.TraerPorFecha();
     }
     else if (!this.especialista && !this.recepcionista) {
       this.TraerPorPaciente();
-    }
-    else {
-      this.TraerPorFecha();
     }
     document.querySelector('angular2csv > button').innerHTML = 'Descargar CSV';
 
@@ -65,14 +66,14 @@ export class ListarTurnoComponent implements OnInit {
   }
 
   TraerPorFecha() {
-    this.miTurnoServicio.traertodos('turnos/', this.filtro).then(data => {
+    this.miTurnoServicio.traertodos('turnos/especialista/', this.filtro + '/' + this.id_especialista).then(data => {
       this.listado = data
       console.log(data)
     })
   }
 
   TraerPorPaciente() {
-    this.miTurnoServicio.traertodos('turnos/cliente/', localStorage.getItem('email')).then(data => {
+    this.miTurnoServicio.traertodos('turnos/cliente/', localStorage.getItem("email")).then(data => {
       this.listado = data
       console.log(data)
     })
